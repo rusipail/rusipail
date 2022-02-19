@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        span, strong{
+            display: block;
+        }
+        span + strong{
+            color: red;
+        }
+        span ~ strong{
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <strong>여긴선택되나?</strong>
+    <span>span태그</span>
+    <strong>span 바로 다음에 있는 strong</strong>
+    <div>
+        <strong>div태그 안에 있는 strong</strong>
+        <span>div 안에 있는 span</span>
+        <strong>div태그 안에 있는 strong</strong>
+    </div>
+    <strong>div 다음에 있는 strong</strong>
+</body>
+</html>

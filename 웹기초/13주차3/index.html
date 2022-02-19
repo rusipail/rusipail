@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        text-align: center;
+    }
+    div {
+        cursor: pointer;
+        font-weight: bolder;
+        font-size: 24px;
+    }
+    .red {
+        color: red;
+    }
+    .green {
+        color: green;
+    }
+    .blue {
+        color: blue;
+    }
+</style>
+<body>
+    <h1>아래 글자를 클릭해봐!</h1>
+    <div onclick="this.innerHTML = prompt('여기를 red, green, blue로 바꿔보세요', '<div class=여기>재미있는 자바스크립트</div>')">재미있는
+        자바스크립트</div>
+</body>
+</html>

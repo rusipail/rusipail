@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>숙제57</title>
+    <style>
+        table{
+            border: 5px dotted black;
+        }
+        .red{
+            border: 5px solid red;
+            background-color: red;
+            width: 100px;
+            height: 100px;
+            padding: 10px;
+        }
+        .green{
+            border: 5px solid green;
+            background-color: green;
+            width: 100px;
+            height: 100px;
+            padding: 10px;
+        }
+        .blue{
+            border: 5px solid blue;
+            background-color: blue;
+            width: 100px;
+            height: 100px;
+            padding: 10px;
+        }
+        .yellow{
+            border: 15px dashed black;
+            background-color: yellow;
+            width: 200px;
+            height: 200px;
+            padding: 19px;
+        }
+    </style>
+</head>
+<body>
+    <table id="pad">
+        <tr>
+            <td><div class="red"> </div></td>
+            <td><div class="green"> </div></td>
+            <td><div class="blue"> </div></td>
+            <td><div class="red"> </div></td>
+        </tr>
+        <tr>
+            <td><div class="blue"> </div></td>
+            <td colspan="2" rowspan="2"><div class="yellow"> </div></td>
+            <td><div class="green"> </div></td>
+        </tr>
+        <tr>
+            <th><div class="green"> </div></th>
+            <th><div class="blue"> </div></th>
+        </tr>
+        <tr>
+            <td><div class="red"> </div></td>
+            <td><div class="blue"> </div></td>
+            <td><div class="green"> </div></td>
+            <td><div class="red"> </div></td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .big{
+        background-image: url(/img/img/instagram.jpg);
+        width: 500px;
+        height: 500px;
+        margin: auto;
+    }
+    .flex{
+        display: inline-flex;
+        overflow-x: scroll;
+        white-space: nowrap;
+        width: 100%
+    }
+    .img{
+        width: 300px;
+        height: 250px;
+        background-image: url(/img/img/instagram.jpg);
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+    div{
+        text-align: center;
+        font-weight: bold;
+    }
+    .one{
+        filter:sepia(50%) hue-rotate(-30deg) saturate(1.25) brightness(1) contrast(100%);
+    }
+    .two{
+        filter: brightness(120%);
+    }
+    .three{
+        filter: sepia(80%) brightness(150%);
+    }  
+    .four{
+        filter: brightness(120%) saturate(2) contrast(110%);
+    }
+    .five{
+        filter: sepia(40%);
+    }
+    .six{
+        filter: brightness(140%);
+    }
+    .seven{
+        filter: sepia(100%) grayscale(50%);
+    }
+    .eight{
+        filter: brightness(150%) saturate(3);
+    }
+    .font{
+        font-size: 20px;
+        line-height: 50px;
+    }
+</style>
+<body>
+    <div class="big"></div>
+    <div class="flex">
+        <div>
+            <div class="font">1977</div>
+            <div class="img one"></div>
+        </div>
+        <div>
+            <div class="font">aden</div>
+            <div class="img two"></div>
+        </div>
+        <div>
+            <div class="font">reyes</div>
+            <div class="img three"></div>
+        </div>
+        <div>
+            <div class="font">lofi</div>
+            <div class="img four"></div>
+        </div>
+        <div>
+            <div class="font">brannan</div>
+            <div class="img five"></div>
+        </div>
+        <div>
+            <div class="font">brooklyn</div>
+            <div class="img six"></div>
+        </div>
+        <div>
+            <div class="font">inkwell</div>
+            <div class="img seven"></div>
+        </div>
+        <div>
+            <div class="font">skyline</div>
+            <div class="img eight"></div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    div{
+        margin: auto;
+    }
+    .picture{
+        display: inline-flex;
+        margin-left: 300px;
+    }
+    .title{
+        font-size: 60px;
+        text-align: center;
+        filter: drop-shadow(16px 16px 5px gray);
+    }
+    .img{
+        margin: 100px 200px;
+    }
+    .one:hover{
+        transform: scale(4);
+        transition: all 1s ease;
+        filter: opacity(100%) brightness(50%);
+    }
+    .two:hover{
+        transform: rotate(360deg) scale(4);
+        transition: all 1s ease;
+        filter: hue-rotate(30deg);
+    }
+    .three:hover{
+        transition: all 1s ease;
+        transform:scale(4);
+        filter: invert(100%);
+    }
+</style>
+<body>
+    <div>
+        <h1 class="title">마우스를 올려보고 클릭해보세요</h1>
+    </div>
+    <div class="picture">
+        <div class="one img"><img src="/img/img/피츄.gif"></div>
+        <div class="two img"><img src="/img/img/img/피카츄.gif"></div>
+        <div class="three img"><img src="/img/img/img/라이츄.gif"></div>
+    </div>
+</body>
+</html>

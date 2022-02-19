@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body, input, button, select{
+            font-size: 24px;
+            user-select: none;
+        }
+
+        .container > div {
+            padding: 10px;
+        }
+
+        label {
+            display: inline-block;
+            width: 300px;
+        }
+
+        button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            filter: drop-shadow(0 0 5px black);
+        }
+    </style>
+</head>
+
+<body>
+    <h1>To-Do-List</h1>
+    <select>
+        <option value="0">맨 뒤</option>
+    </select><br>
+    <input type="text" id="inp">
+    <span id="num">0</span>개
+    <div class="container"></div>
+    <ul>
+        <li>글자를 치고 엔터를 치면 checkbox와 글자, x 버튼 세개가 등록된다.</li>
+        <li>이 때 등록된 글자는 select 태그에 option으로 똑같이 등록된다.</li>
+        <li>등록 순서는 option과 div는 무조건 같아야 한다.</li>
+        <li>option 태그에 따라 등록되는 위치는 연결된 div 태그의 앞쪽에 등록되고, 맨 뒤 일경우 맨 뒤쪽에 등록된다.</li>
+        <li>등록된 개수는 계속 업데이트 되어야 한다.</li>
+        <li>checkbox 누를 때
+            <ul>
+                <li>checkbox를 누를 경우 해당 div의 배경은 빨강, 글자는 흰색이 된다.</li>
+                <li>또한 div와 연결된 option 태그도 배경 빨강에 글자가 흰색이 된다.</li>
+                <li>다시 누르면 원래대로 돌아온다.</li>
+            </ul>
+        </li>
+        <li>x버튼
+            <li>해당 div는 삭제되며, div와 연결되어 있던 option 태그도 삭제된다.</li>
+        </li>
+        <li class="red">절대로 innerHTML에 태그를 문자열로 작성해서는 안되며, createElement와 insertAdjacentElement 만을 사용해야한다.</li>
+        <li>innerHTML에 문자열만 쓰는 것은 가능하다.</li>
+    </ul>
+    <script>
+        const num = document.querySelector('#num');
+        const inp = document.querySelector('#inp');
+        const container = document.querySelector('.container');
+        const select = document.querySelector('select');
+        let id = 0;
+
+    </script>
+</body>
+
+</html>

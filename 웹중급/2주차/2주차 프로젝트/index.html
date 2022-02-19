@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        td {
+            width: 50px;
+            height: 50px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <table></table>
+    </div>
+    <button id="btn">랜덤 숫자 생성</button>
+    <h3></h3>
+    <script>
+        // https://ko.wikipedia.org/wiki/%EB%A7%88%EB%B0%A9%EC%A7%84
+        const table = document.querySelector('table');
+        const btn = document.querySelector('#btn');
+        const h3 = document.querySelector('h3');
+
+        // 마방진 규칙 => 가로, 세로, 대각선 방향의 합이 모두 같으면 마방진.
+        // 랜덤한 숫자 9개를 생성해서 배치하고 마방진인지 아닌지를 판단
+        /** ex. 
+         * [
+         *  [2, 7, 6],
+         *  [9, 5, 1],
+         *  [4, 3, 8]
+         * ]
+         * 
+        */
+
+        const initTable = () => {
+            // 3x3 테이블 생성하는 함수
+            const arr = createRandNums(9);
+            console.log(arr);
+            for(let i = 0; i < 3; i++){
+                const tr = document.createElement('tr');
+                table.appendChild(tr);
+                for(let j = 0; j < 3; j++){
+                    const td = document.createElement('td');
+                    td.id = i * 3 + (j);
+                    tr.appendChild(td);
+                }                
+            }
+        }
+
+        const createRandNums = (num) => {
+            // 중복되지 않는 랜덤한 숫자 9개 생성하는 함수
+            const arr = [];
+            for(let i = 1; i <= num; i++){
+                arr.push(i);
+            }
+            for(let i = 0; i < num; i++){
+                const pick = Math.floor(Math.random() * (num - i)) + i;
+                const pickNum = arr[pick];
+                arr[pick] = arr[i];
+                arr[i] = pickNum;
+            }
+            return arr;
+        }
+
+        const isMagicSquare = (nums) => {
+            // 마방진 유무 판단하는 함수
+           
+        }
+
+        btn.onclick = () => {
+            const arr = createRandNums(9);
+            // 버튼을 클릭하면 랜덤한 숫자가 생성되고 화면에 그린 후 마방진 유무 판단
+            // 아래 내용 템플릿 리터럴을 이용하여 해결
+            const td = document.querySelector('td');
+            td.innerHTML = arr[`${td.id}`]
+        }
+
+        initTable();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+        }
+        #container{
+            display: flex;
+            flex-wrap: wrap;
+            align-content: flex-start;
+            overflow: hidden;
+            filter:opacity(100%);
+        }
+
+        #container.remove{
+            transition: filter 1s;
+            filter: opacity(0%);
+        }
+
+        .box{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: xx-large;
+            width: calc(100vw / 5);
+            height: calc(100vh / 5);
+        }
+
+        h1 {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+    <h1>아무 키나 눌러보세요</h1>
+    <!--<ul>
+        <li>키를 누를 때마다 width: calc(100vw / 5), height: calc(100vh / 5) 크기의 사각형이 생긴다.</li>
+        <li>사각형 안에는 누른 키의 정보가 써진다.</li>
+        <li>25개의 사각형이 만들어지면 사각형이 투명해지면서 사라지고, 그 동안은 사각형을 추가할 수 없다.</li>
+        <li>그 이후는 다시 사각형을 처음부터 추가할 수 있다.</li>
+    </ul>!-->
+    <script>
+        const body = document.querySelector('#container');
+        let count = 0;
+        const rand = () =>{
+            return Math.floor(Math.random() * 256);
+        };
+
+        window.onkeydown = event =>{
+            if(!body.classList.contains('remove')){
+                const div = document.createElement('div');
+                div.classList.add('box');
+                div.innerHTML = event.code;
+                div.style.backgroundColor = `rgb(${rand()}, ${rand()} ,${rand()})`;
+                body.appendChild(div);
+                count += 1;
+                if(count === 25){
+                    body.classList.add('remove');
+                    setTimeout(() => {
+                        body.innerHTML = '';
+                        body.classList.remove('remove');
+                        count = 0;
+                    }, 1000);
+                }
+            }
+        };
+    </script>
+</body>
+
+</html>

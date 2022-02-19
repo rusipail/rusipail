@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<style>
+    ul {
+        padding: 0;
+        margin: 0;
+    }
+    li {
+        display: inline-block;
+        padding: 10px 15px;
+        transition: all 0.2s;
+    }
+    li:hover {
+        background-color: green;
+        color: white;
+        cursor: pointer;
+    }
+    .box{
+        width: 340px;
+        display: inline-block;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+    img {
+        width: 100%;
+    }
+    .hwa, .hwa::after, .hwa::before {
+        color: gray;
+    }
+    .hwa::after {
+        content: "]";
+    }
+    .hwa::before {
+        content: "[";
+    }
+    .aut{
+        font-size: 75%;
+        color: violet;
+    }
+</style>
+<body>
+    <h1>
+        장르별 추천웹툰
+    </h1>
+    <ul>
+        <li>일상</li>
+        <li>개그</li>
+        <li>판타지</li>
+        <li>액션</li>
+    </ul>
+    <div id="container">
+        <div class="box">
+            <img src="/img/cartoon1.webp" height="170">
+            <strong>이 어지러운 세상에서</strong><br>
+            <div class="hwa">18화 전화</div>
+            <div class="aut">더 갓 오브 미</div>
+        </div>
+        <div class="box">
+            <img src="/img/cartoon2.webp" height="170">
+            <strong>달에서 별따기</strong><br>
+            <div class="hwa">27화 별이 더 컷다(3)</div>
+            <div class="aut">트리스타</div>
+        </div>
+         <div class="box">
+            <img src="/img/cartoon3.webp" height="170">
+            <strong>우주나비</strong><br>
+            <div class="hwa">191화 빅뱅(2)</div>
+            <div class="aut">요정</div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        td {
+            border: 1px solid black;
+            width: 100px;
+            height: 100px;
+            padding: 10px;
+            user-select: none;
+            text-align: center;
+            font-size: 30px;
+        }
+
+        td.win {
+            font-weight: bolder;
+            background-color: blue;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Tic-Tac-Toe</h1>
+    <table id="table"></table>
+    <h1 id="resultEl"></h1>
+    <script>
+        /*
+            틱택토 게임 만들기
+            틱택토 게임?? 
+                - 오목과 비슷한 게임으로 가로, 세로, 대각선 중 한 줄이라도 같은 모양으로 채우면 승리하게 되는 게임
+                - O와 X가 번갈아 가면서 두는 턴제게임
+                - O가 먼저 두도록 한다.
+            맵의 크기 => 3이 기본이지만 prompt로 크게 받을 수도 있다.
+
+            가로, 세로, 대각선 중 하나라도 같은 모양으로 채워지면 해당 줄이 파란색으로 변하며 승리했다는 메세지가 출력되도록 한다.
+
+            만약 모든 칸이 채워져도 승부가 나지 않으면 무승부라고 알림창을 띄운다.
+
+            게임이 종료되면 게임을 할 수 없도록 칸을 클릭할 때 게임이 종료되었다고 한다.
+        */
+        const table = document.querySelector('#table');
+        const resultEl = document.querySelector('#resultEl');
+        const can = parseInt(prompt('칸 개수 정하기', '3')); // 맵의 크기를 변수로 설정
+
+        // 승리할 수 있는 모든 경우의 수를 담고 있는 배열. 이 배열을 활용해서 승리 유무를 판단하도록 한다.
+        // c0는 오른쪽아래의 대각선, c1은 오른쪽 위의 대각선 방향의 승리다.
+        //  c0   --    c1
+        //  c0   c0,c1 --
+        //  c1   --    c0
+        // 나머지 가로 방향은 yn, 세로 방향은 xn으로 값이 들어간다.
+        const combination = ['c0', 'c1'];
+
+        // 순서를 나타내는 변수. 0 -> 1 -> 0 -> 1 순으로 변할 수 있도록 하고 turns의 인덱스로 사용하도록 한다.
+        let turn = 0;
+        const turns = ['O', 'X'];
+
+        const createMap = () => {
+            for (let i = 0; i < can; i++) {
+                const tr = document.createElement('tr');
+                combination.push(`x${i}`, `y${i}`);
+                for (let j = 0; j < can; j++) {
+                    const td = document.createElement('td');
+                    
+                    // td태그의 class 설정이 중요
+                    td.classList.add(`y${j}`, `x${i}`);
+                    // 먼저 yn (n은 몇번째 줄인지)와 xn(n은 몇번째 칸인지) 를 class에 넣어준다.
+                    if(i === j) td.classList.add('c0');
+                    if(can - i - 1 === j) td.classList.add('c1');
+                    td.dataset.turn = '-';
+                    // 만약 오른쪽 아래 방향 대각선에 해당하면 c0, 오른쪽 위 방향 대각선이면 c1을 넣어준다.
+                    // data-turn에는 "-"을 넣어준다.
+                    
+                    tr.appendChild(td); 
+                }
+                table.appendChild(tr);
+            }
+        };
+
+
+        const check = (td) => {
+            const user = turns[turn];
+            td.innerHTML = user;
+            td.dataset.turn = user;
+            // 받아온 user는 data-turn과 innerHTML 에 넣어준다.
+            
+            // combination 배열을 map을 사용해서 querySelectorAll로 각 요소와 data-turn에 user가 있는 NodeList를 갖는 배열을 만든다.
+            // find로 길이가 can과 같은 길이를 갖는 NodeList가 있는지 찾는다.
+            const result = combination
+                            .map(v => document.querySelectorAll(`td.${v} [data-turn="${user}"]`))
+                            .find(v => v.length === can);
+                
+
+            // 무승부의 경우를 찾는다.
+            const moo = document.querySelectorAll(`td[data-turn="-"]`).length;
+
+
+            if(!moo){
+                alert('무승부...')
+            } else if(result){
+                result.forEach(v => v.classList.add('win'));
+                alert(`${user}의 승리`)
+            } else {
+                turn = 1 - turn;
+            }
+        };
+
+        table.onclick = e => {
+            const tar = e.target;
+            if(turn === 2){
+                alert('게임이 이미 종료되었습니다.')
+            } else if (tar.nodeName === 'TD' && tar.dataset.turn === '-'){
+                check(tar);
+            } else {
+                alert('거기에는 둘 수 없습니다.');
+            }
+            
+        };
+
+        createMap()
+    </script>
+</body>
+
+</html>

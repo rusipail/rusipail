@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+        }
+        div{
+            display: inline-block;
+            background-color: palegreen;
+            border: 1px solid black;
+            width: 100px;
+            height: 100px;
+            transition: all 0.3s;
+        }
+        .a:hover{
+            transform: translate(50px, 50px) scale(2);
+        }
+        .b:hover{
+            transform: scale(2) translate(50px, 50px);
+        }
+        .c:hover{
+            transform: translate(50px, 50px) rotate(45deg);
+        }
+        .d:hover{
+            transform: rotate(45deg) translate(50px, 50px);
+        }
+        .e:hover{
+            transform: translate(50px, 50px) rotate(45deg) scale(2);
+        }
+        .f:hover{
+            transform: scale(2) rotate(45deg) translate(50px, 50px);
+        }
+    </style>
+</head> 
+<body>
+  <div class="a">translate나중 scale먼저</div>
+  <div class="b">scale나중 translate먼저</div>
+  <div class="c">translate나중 rotate먼저</div>
+  <div class="d">rotate나중 translate먼저</div>
+  <div class="e">translate나중 rotate중간 scale먼저</div>
+  <div class="f">scale나중 rotate중간 translate먼저</div>  
+</body>
+</html>

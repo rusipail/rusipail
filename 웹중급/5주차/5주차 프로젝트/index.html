@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: black;
+            overflow: hidden;
+        }
+
+        .star {
+            width: 5px;
+            height: 5px;
+            background-color: white;
+            border-radius: 50%;         
+            position: fixed;
+            transition: transform .1s;
+        }
+
+        .star.bright {
+            transform: scale(5);
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        /*
+            밤하늘의 별들을 마우스로 움직이면 정해진 거리 내의 별들을 밝게 보여주는 프로그램
+
+            1. STAR_NUM 만큼의 별들을 생성한 후 랜덤한 위치에 배치시킨다. (position 을 활용할 것)
+            2. 마우스 위치를 받아와서 마우스의 위치와 별 사이의 거리가 SCOPE 이내라면 밝게 보이도록 구현한다. (bright 클래스 활용할 것)
+
+            참고)
+            거리 구하기 => 피타고라스 정리 활용(z^2 = x^2 + y^2)
+            스켈레톤 코드에 정의돼있는 상수값 사용하기
+            모든 별들은 querySelectorAll을 통해 가져올 수 있도록 한다.  
+        */
+        const STAR_NUM = 600    // 별들의 총 개수
+        const SIZE = 5          // 별들의 크기
+        const scope = 120;      // 밝게 할 범위
+
+        // 마우스의 x, y 좌표를 담고있는 변수
+        let x = null;
+        let y = null;
+
+        let stars;  // 모든 별들을 담고 있는 유사배열
+
+        // 화면 크기가 바뀔 때마다 별들을 새롭게 생성하는 코드
+        window.onresize = () => {
+            document.body.innerHTML = '';
+            createStars()
+        }
+
+        const createStars = () => {
+            for(let i = 0; i < STAR_NUM; i++){
+                const star = document.createElement('span');
+                star.classList.add('star');
+                let x = 0, y= 0;
+                x = Math.floor(Math.random() * innerWidth);
+                y = Math.floor(Math.random() * innerHeight);
+                star.style.left = `${x}px`;
+                star.style.top = `${y}px`;
+                document.body.appendChild(star);
+            }
+            stars = document.querySelectorAll('.star');
+        }
+
+        document.body.onmousemove = (e) => {
+            for(let i = 0; i < STAR_NUM; i ++){
+                const dx = parseFloat(stars[i].style.left) - e.offsetX;
+                const dy = parseFloat(stars[i].style.top) - e.offsetY;
+                const distance = (dx ** 2 + dy ** 2) ** 0.5;
+                if(scope > distance){
+                    stars[i].classList.add('bright')
+                } else{
+                    stars[i].classList.remove('bright')
+                }
+            }
+        }
+
+        createStars()
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+        }
+
+        .container>div {
+            width: 5px;
+            height: 100%;
+        }
+
+        .color-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container"></div>
+    <div class="color-container">
+        <div>색상을 바꿔보세요</div>
+        <input type="color" id="color">
+    </div>
+    <script>
+        /*
+            input[type="color"]의 색상을 바꿀 때마다 .container 태그 부분이 3등분 되어 그라데이션이 생긴다.
+            그라데이션은 투명도를 조절하여 오른쪽에서 왼쪽으로 갈수록 투명해진다.
+            작은 div들을 여러 개 만들어보자
+        */
+        const container = document.querySelector('.container');
+        const color = document.querySelector('#color');
+        const iteration = 100;  // 1개의 그라데이션을 만들기 위한 반복 횟수
+
+        const createDivs = (val) => {
+            for (let j = 0; j < iteration; j++) {
+                const div = document.createElement('div');
+                div.style.backgroundColor = val;
+                div.style.filter = `opacity(${1 - j / iteration})`;
+                div.style.width = 'calc(100% / 100)';
+                div.style.height = '700px';
+                container.appendChild(div);
+                // 여기에 코드 작성
+                
+            }
+        }
+
+        const main = (val) => {
+            container.innerHTML = '';
+            for(let i = 0; i < 3; i++){
+                createDivs(val);
+            }
+            // createDivs 함수를 3번 호출
+        }
+
+        color.oninput = () => {
+            main(color.value);
+            document.querySelector('.color-container > div').style.color = color.value;
+        }
+    </script>
+</body>
+
+</html>

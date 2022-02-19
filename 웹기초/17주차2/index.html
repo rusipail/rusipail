@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .flex{
+            display: inline-flex;
+        }
+        #result{
+            width: 170.67px;
+            height: 21.33px;
+            border: 1px solid gray;
+            border-radius: 10%;
+            background-color: ghostwhite;
+        }
+        #result2{
+            width: 170.67px;
+            height: 21.33px;
+            border: 1px solid gray;
+            border-radius: 10%;
+            background-color: ghostwhite;
+        }
+    </style>
+</head>
+<body>
+    <h2>섭씨 화씨 변환기</h2>
+    <div class="flex">
+        <input type="number" 
+        placeholder='섭씨 온도를 입력하세요'
+        oninput="console.log(this.value);
+            num = this.value * 1.8 + 32;
+            let result = document.querySelector('#result');
+            result.innerHTML = num;
+        ">ºC => <div id="result"></div>ºF
+    </div>
+    <br>
+    <div class="flex">
+        <input type="number"
+        placeholder='화씨 온도를 입력하세요'
+        oninput="console.log(this.value);
+            num = (this.value + 32) / 1.8;
+            let result2 = document.querySelector('#result2');
+            result2.innerHTML = num;
+        ">ºF => <div id="result2"></div>ºC
+    </div>
+    <h2>무게 단위 변화</h2>
+    <div>
+        <input type="number"
+        placeholder="무게를 입력하세요(g)"
+        oninput="console.log(this.value);
+            pounds = this.value / 0.0022046;
+            kilograms = this.value * 1000;
+            ounces = this.value / 0.035274;
+            let result3 = document.querySelector('#result3');
+            result3.innerHTML = ponds + lbs;
+            let result4 = document.querySelector('#result4');
+            result4.innerHTML = kilograms + kg;
+            let result5 = document.querySelector('#result5');
+            result5.innerHTML = ounces + oz;
+        ">
+        <div id="result3">파운드(pounds) :</div>
+        <div id="result4">킬로그램(kilofrans) :</div>
+        <div id="result5">온스(Ounces) :</div>
+    </div>
+</body>
+</html>

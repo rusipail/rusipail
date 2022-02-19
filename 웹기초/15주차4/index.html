@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        box-sizing: border-box;
+    }
+    img{
+        width: 300px;
+        height: 300px;
+        transition: all 0.5s;
+    }
+    td{
+        text-align: center;
+        font-size: 30px;
+    }
+    .img:hover{
+        border: 1px solid black;
+    }
+    table{
+        margin: auto;
+    }
+    .center{
+        text-align: center;
+    }
+    .transition1{
+        transform: rotate(90deg);
+    }
+    .transition2{
+        transform: rotate(-90deg);
+    }
+    .transition3{
+        transform: rotate(90deg);
+    }
+    .transition4{
+        transform: rotate(90deg);
+    }
+</style>
+<body>
+    <h2 class="center">출발지점에서 도착지점까지 공이 도착할 수 있게 파이프를 클릭하면서 회전시켜보세요</h2>
+    <table>
+        <tr>
+            <td>🔴출발</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="img" ><img class="transition1" id="1"onclick="this.style.transform = `rotate(${this.id * 90 + 90}deg)`; this.id ++" src="/img/1.png"></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="img"><img class="transition2" id="1"onclick="this.style.transform = `rotate(${this.id * 90 - 90}deg)`; this.id ++" src="/img/2.png"></td>
+            <td class="img"><img class="transition3" id="1"onclick="this.style.transform = `rotate(${this.id * 90 + 90}deg)`; this.id ++" src="/img/3.png"></td>
+            <td class="img"><img class="transition4" id="1"onclick="this.style.transform = `rotate(${this.id * 90 + 90}deg)`; this.id ++" src="/img/4.png"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td class="img"><img class="transition5" id="1"onclick="this.style.transform = `rotate(${this.id * 90}deg)`; this.id ++" src="/img/5.png"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>🔵도착</td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .container>div {
+            display: inline-block;
+            text-align: center;
+            font-weight: bolder;
+            width: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container"></div>
+    <script>
+        const defaultSize = 40; // div 태그의 기본 크기
+        const container = document.querySelector('.container');
+
+        const getTotalSize = () =>{
+            const X = Math.floor(innerWidth / defaultSize);
+            const Y = Math.floor(innerHeight / defaultSize);
+            return X * Y;
+        };
+
+        const getRandomHanguel = () =>{
+            const startCode = '가'.charCodeAt(0);
+            const endCode = '헣'.charCodeAt(0);
+            return startCode + Math.floor(Math.random() * (endCode - startCode + 1))
+        };
+
+        const getRandomColor = () =>{
+            let str = 'rgb('
+            for(let i = 0; i < 3; i++){
+                str += Math.floor(Math.random() * 256);
+                if(i !== 2){
+                    str += ','
+                }
+            }
+            str += ')'
+            return str;
+        };
+
+        const init = () => {
+            const total = getTotalSize();
+            for(let i = 0; i < total; i++){
+                const randomCode = getRandomHanguel();
+                const str = String.fromCharCode(randomCode);
+                const div = document.createElement('div');
+                div.innerHTML = str;
+                div.style.color = getRandomColor();
+                container.appendChild(div);
+            }
+            // 여기에 코드 작성
+            // 가 ~ 힣 사이에 있는 랜덤한 한글 글자를 화면 크기에 맞게 출력. 글자는 div 태그를 활용해 생성
+            // hint: 유니코드와 반복문 활용하기
+            // 여기에 코드 작성
+        };
+
+        window.onresize = () => {
+            container.innerHTML = '';
+            init();
+            // resize 이벤트가 발생할 때마다 화면 크기에 맞게 글자들이 다시 생성됨
+
+        };
+
+        init();
+    </script>
+</body>
+
+</html>

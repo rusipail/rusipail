@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            text-align: center;
+        }
+        #result{
+            position: relative;
+            width: 600px;
+            height: 300px;
+            border: 1px solid black;
+            font-size: 30px;
+            font-weight: bolder;
+            margin: auto;
+            vertical-align: middle;
+            padding-top: 270px;
+        }
+        button{
+            width: 50px;
+            height: 50px;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="result">
+            클릭하세요
+        </div>
+        <script>
+            const result = document.querySelector('#result');
+            result.onclick = () => {
+                let numtop = Math.random();
+                let numleft = Math.random();
+                result.innerHTML += `<button style = 'top: ${Math.floor(numtop * 550)}px; left: ${Math.floor(numleft * 550)}px'>짠</button>`;
+            }
+        </script>
+    </div>
+</body>
+</html>

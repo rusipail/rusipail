@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            width: 300px;
+            height: 1000px;
+            border: 1px solid black;
+        }
+        .triangle{
+            list-style: none;
+            font-size: 25px;
+            line-height: 40px;
+            padding-bottom: 20px;
+            
+        }
+        .triangle:hover{
+            transform: translate(5px,0px);
+            cursor: pointer;
+        }
+        .triangle::before{
+            content: "▶";
+        }
+        .show::before{
+            content: "▼";
+        }
+        .closed::before{
+            content: "▶";
+        }
+        .closed > ul{
+            transform: scale(0);
+        }
+        .colsed > div{
+            transform: scale(0);
+        }
+        .show > div{
+            transform: scale(1);
+        }
+        .flex{
+            display: inline-flex;
+        }
+        .a, .b, .c{
+            width: 500px;
+            font-size: 40px;
+            font-weight: bolder;
+            padding: 20px;
+            position: relative;
+            top: -300px;
+            left: 600px;
+            text-align: center;
+            transform: scale(0);
+        }
+        .container > .one ~ .a{
+            transform: scale(1);
+        }
+        .container > .two ~ .b{
+            transform: scale(1);
+        }
+        .container > .three ~ .c{
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body>
+    <div class="flex">
+        <ul class="container">
+            <li class="triangle closed" onclick="this.classList.toggle('show'); this.classList.toggle('closed'); this.classList.toggle('one')">시작메뉴
+                <ul>
+                    <li>vs code</li>
+                    <li>그림판</li>
+                    <li>카카오톡</li>
+                </ul>
+            </li>
+            <li class="triangle closed" onclick="this.classList.toggle('show'); this.classList.toggle('closed'); this.classList.toggle('two')">문서
+                <ul>
+                    <li>HTML</li>
+                    <li>CSS</li>
+                </ul>
+            </li>
+            <li class="triangle closed" onclick="this.classList.toggle('show'); this.classList.toggle('closed'); this.classList.toggle('three')">다운로드
+                <ul>
+                    <li>사진 1</li>
+                    <li>사진 2</li>
+                </ul>
+            </li>
+            <div class="a">선택된 항목은 시작메뉴</div>
+            <div class="b">선택된 항목은 문서</div>
+            <div class="c">선택된 항목은 다운로드</div>
+            
+        </ul>
+    </div>
+</body>
+</html>

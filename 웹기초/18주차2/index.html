@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input:valid + div{
+            color: green;
+        }
+        input:invalid + div{
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>인풋 연습</h1>
+    이름 : <input type="text" maxlength="6" minlength="2" required>
+    <div></div>
+    나이 : <input type="number" min="1" max="120" step="1">
+    <div></div>
+    <!--<ul>
+        <li>첫번째 input
+            <ul>
+                <li>만일 넘거나 적을 경우 <span style="color:red;">이름은 2 ~ 6자 사이로 써주세요.</span> 가 나온다.</li>
+                <li>값이 없을 경우 <span style="color:red;">이름을 써주세요.</span> 가 나온다.</li>
+                <li>값이 맞으면 두 input 다 <span style="color:green">valid</span>로 나온다.</li>
+            </ul>
+        </li>
+        
+        <li>두번째 input
+            <ul>
+                <li>값이 자연수가 아닐 때 <span style="color:red;">나이는 자연수를 입력해주세요.</span> 가 나온다.</li>
+                <li>값이 1 ~ 120가 아닐 경우 <span style="color:red;">나이는 1 ~ 120 사이의 값을 입력해주세요.</span> 가 나온다.</li>
+                <li>값이 맞으면 두 input 다 <span style="color:green">valid</span>로 나온다.</li>
+            </ul>
+        </li>
+    </ul>!-->
+    <script>
+        const text = document.querySelector('input[type="text"]');
+        const textDiv = document.querySelector('input[type="text"] + div');
+        const numb = document.querySelector('input[type="number"]');
+        const numbDiv = document.querySelector('input[type="number"] + div');
+        text.oninput = () =>{
+            textDiv.innerHTML = '';
+            if(text.validity.valid){
+                textDiv.innerHTML = 'valid';
+            } else {
+                if(text.validity.tooShort || text.validity.tooLong){
+                    textDiv.innerHTML = '이름은 2~ 6자 사이로 써주세요.';
+                }
+                if(text.validity.valueMissing){
+                    textDiv.innerHTML = '이름을 써주세요.'
+                }
+            }
+        }
+        numb.oninput = () =>{
+            numbDiv.innerHTML = '';
+            if(numb.validity.valid){
+                numbDiv.innerHTML = 'valid';
+            } else {
+                numbDiv.innerHTML = '나이는 1 ~ 120 사이의 값을 입력해주세요';
+            }
+        }
+    </script>
+</body>
+
+</html>

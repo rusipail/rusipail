@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            font-size: xx-large;
+        }
+        input{
+            box-sizing: border-box;
+            font-size: x-large;
+            width: 400px;
+            outline: none;
+            margin: 20px;
+        }
+        input:invalid{
+            border:5px solid red;
+        }
+    </style>
+</head>
+<body>
+    <input type="number" min="1" step="1" max="275759" required placeholder="워프하려면 년도 입력">
+    <input type="datetime-local" id="inp">
+    <div id="result"></div>
+    <!--<ul>
+        <li>첫번째 input 태그
+            <ul>
+                <li>1 ~ 275759 의 값을 입력하지 않으면 `1 ~ 275759를 입력해주세요.`</li>    
+                <li>두번째 input태그에 값이 입력되지 않은 상태면 `아직 날짜가 입력된 상태가 아닙니다.`</li>
+                <li>값이 제대로 되어 있으면 두번째 input 태그의 년도와 아래 div의 내용이 바뀐다.</li>
+            </ul>
+        </li>
+        <li>두번째 input 태그
+            <ul>
+                <li>value 값의 전체 양식은 yyyy-mm-dd 이다.</li>
+                <li>값이 입력 받을 때마다 div의 내용이 바뀐다.</li>
+                <li>년도는 항상 yyyy 이런식으로 되어있다.</li>
+                <li>예를 들어 1년이면 0001, 132년이면 0132이다.</li                                                                                                                                                                                                                                                                                                                                                                                                                                                                         >
+                <li>만일 4자리를 초과하면 그대로 쓴다.</li>
+            </ul>
+        </li>
+    </ul>!-->
+    <script>
+        const num = document.querySelector('input[type="number"]');
+        const inp = document.querySelector('#inp');
+        const result = document.querySelector('#result');
+
+        const inpFun = () =>{
+            const val = inp.value;
+            const year = Number(val.slice(0, -12));
+            const month = Number(val.slice(-11, -9));
+            const date = Number(val.slice(-8, -6));
+            const hour = Number(val.slice(-5, -3));
+            const minute = Number(val.slice(-2));
+            num.value = year;
+            result.innerHTML = `${year}년 ${month}월 ${date}일 ${hour}시 ${minute}분 `;
+        }
+
+        num.oninput = (evt) =>{
+            if(num.validity.valid && inp.value !== ''){
+                inp.value = `${num.value.padStart(4, '0')}${inp.value.alice(-12)}`;
+                inpFun();
+            } else if(!num.validity.valid){
+                result.innerHTML = '1 ~ 275759를 입력해주세요.';
+            } else if(inp.value === ''){
+                result.innerHTML = '아직 날짜가 입력된 상태가 아닙니다.';
+            }
+        };
+
+        inp.oninput = inpFun
+    </script>
+</body>
+</html>

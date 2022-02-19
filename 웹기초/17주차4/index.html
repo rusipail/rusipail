@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .flex{
+        display: flex;
+        justify-content: space-evenly;
+    }
+    button{
+        width: 500px;
+    }
+    .num1, .num2, .num3, .num4{
+        height: 24px;
+    }
+</style>
+<body>
+    <div class="flex">
+        <div class="num1">숫자</div>
+        <div class="num2">숫자</div>
+        <div class="num3">숫자</div>
+        <div class="num4">숫자</div>
+    </div>
+    <div><button id="btm">클릭</button></div>
+    <script>
+        const btn = document.querySelector("#btn");
+        const num1 = document.querySelector(".num1");
+        const num2 = document.querySelector(".num2");
+        const num3 = document.querySelector(".num3");
+        const num4 = document.querySelector(".num4");
+
+        btn.onclick = () => {
+            const num = Math.random();
+            const pick = `${Math.floor(num * 4 + 1)}`;
+            document.querySelector(`#container > div:nth-child(${pick})`).innerHTML = `${Math.floor(num * 100)}`;
+            // let num = Math.random();
+            // num1.innerHTML = `${Math.floor(num * 100)}`;
+            // num2.innerHTML = `${Math.floor(num * 100)}`;
+            // num3.innerHTML = `${Math.floor(num * 100)}`;
+            // num4.innerHTML = `${Math.floor(num * 100)}`;
+        };
+        /*여기서 눌렀을 때 1~4중에서 1개만 선택되게 하는지 모르겠다*/
+    </script>
+</body>
+</html>

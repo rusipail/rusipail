@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            display: flex;
+            margin: 0;
+            height: 100vh;
+            flex-direction: column;
+        }
+        #text{
+            box-sizing: border-box;
+            width:100%;
+            flex-grow: 1;
+            border: 1px solid black;
+            resize: none;
+            font-size: xx-large;
+            height: 50%;
+        }
+        #result{
+            font-size: x-large;
+            flex-grow: 1;
+            width: 100%;
+            height: 50%;
+            overflow: auto;
+        }
+        span.glow{
+            background-color: greenyellow;
+        }
+        del{
+            color: gray;
+            filter:opacity(70%);
+        }
+        #modal{
+            position: absolute;
+            left: 1065px;
+            top: 0px;
+        }
+        #inp1{
+            width: 290px;
+        }
+        span:nth-child(1)::before{
+            content: '찾기 :';
+        }
+        #inp2{
+            width: 290px;
+        }
+        #inp2::before{
+            content: '바꾸기 :';
+        }
+    </style>
+</head>
+<body>
+    <h1>글씨를 써보세요.</h1>
+    <textarea id="text"></textarea>
+    <div id="result"></div>
+    <div id="modal">
+        <span></span><input id="inp1" type="text"><br>
+        <span></span><input id="inp2" type="text">
+    </div>
+    <!--<ul>
+        <li>펼치기</li>
+        <li>21주차 2번 숙제의 기능을 모두 갖고 있으며 추가적인 기능이 있다.</li>
+        <li>ctrl + F 키를 눌렀을 때
+            <ul>
+                <li>찾기 기능이다.</li>
+                <li>ctrl + F 를 누르면 우측 상단으로부터 input 태그가 하나 내려온다.</li>
+                <li>그곳에 글자를 입력하면 아래 div에 동일한 글자들에 background-color가 greenyellow로 바뀐다.</li>
+                <li>뿐만 아니라 찾기 input에 글자를 써둔 상태로 textarea에 글자를 써도 찾기가 자동으로 update된다.</li>
+            </ul>
+        </li>
+        <li>ctrl + G 키를 눌렀을 때
+            <ul>
+                <li>바꾸기 기능이다.</li>
+                <li>ctrl + G 를 누르면 우측 상단으로부터 input 태그가 두개 내려온다.</li>
+                <li>첫번째 input에 글자를 입력하면 아래 div에 동일한 글자들에 del 효과와 color가 gray로 바뀐다.</li>
+                <li>두번째 input에 글자를 입력하면 아래 div에 del 효과가 생긴 글자 옆에 background-color가 greenyellow로 되어있는 글자가 추가된다.</li>
+                <li>이상태로 엔터를 누르면 textarea와 div에 있는 input 태그의 첫번째 글자들이 모두 input태그의 두번째 글자로 바뀐다.</li>
+                <li>뿐만 아니라 찾기 input에 글자를 써둔 상태로 textarea에 글자를 써도 찾아 바꾸기가 자동으로 update된다.</li>
+            </ul>
+        </li>
+        <li style="background-color:red;color:white;">주의 : 특수문자가 찾아지지 않을 수도 있으니 잘 생각하면서 코딩하길 바람</li>
+    </ul>!-->
+    <script>
+        const text = document.querySelector('#text');
+        const result = document.querySelector('#result');
+        const modal = document.querySelector('#modal');
+        const inp1 = document.querySelector('#inp1');
+        const inp2 = document.querySelector('#inp2');
+        
+        text.oninput = (evt) =>{
+            result.innerHTML =  
+            text.value.replaceAll('&', '&amp;')
+            .replaceAll('<', '&lt;')
+            .replaceAll('>', '&gt;')
+            .replaceAll(' ', '&nbsp;')
+            .replaceAll('\n', '<br>')
+        }
+        window.onkeydown = (evt) =>{
+            if(evt.code === 'Ctrl + F'){
+                
+            }
+        }
+    </script>
+</body>
+</html>

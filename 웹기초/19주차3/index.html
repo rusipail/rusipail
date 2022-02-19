@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: lightgray;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .board {
+            border: 5px solid black;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            width: 300px;
+            height: 300px;
+            transform: translate(-50%, -50%);
+            background-color: white;
+        }
+
+        .ball {
+            width: 50px;
+            height: 50px;
+            left: 0;
+            top: 0;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>마우스로 공을 움직여보세요</h1>
+    <div class="board">
+        <div class="ball"></div>
+    </div>
+    <script>
+        const ball = document.querySelector('.ball');
+        const board = document.querySelector('.board');
+        const h1 = document.querySelector('h1');
+
+        board.onmousemove = (event) => {
+            let X = 0;
+            let Y = 0;
+            if (event.target === board) {
+                X = event.offsetX - 25;
+                Y = event.offsetY - 25;
+            } else {
+                parseFloart(ball.style.left) + event.offsetX - 25;
+                parseFloart(ball.style.top) + event.offsetY - 25;
+            }
+
+            if (X < 0) {
+                X = 0;
+            } else if (X > 250) {
+                X = 250;
+            }
+            if (Y < 0) {
+                Y = 0;
+            } else if (Y > 250) {
+                Y = 250;
+            };
+
+            board.onmouseenter = e => {
+                h1.innerHTML = '공이 들어왔습니다.'
+            };
+
+            board.onmouseleave = e => {
+                h1.innerHTML = '공이 나왔습니다.'
+            };
+
+            ball.style.left = `${X}px`;
+            ball.style.top = `${Y}px`;
+        }
+    </script>
+</body>
+
+</html>

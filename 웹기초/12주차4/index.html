@@ -1,0 +1,260 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>애플</title>
+</head>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+    body{
+        margin: 0px;
+        overflow: scroll;
+    }
+    .fixed{
+        display: inline-flex;
+        background-color: black;
+        color:white;
+        width: 100%;
+        margin-top: 0px;
+        position: fixed;
+    }
+    .top{
+        padding-top: 10px;
+        text-align: center;
+        padding-left: 40px;
+        padding-right: 40px;
+        font-size: 15px;
+    }
+    .top:hover{
+        color: gray;
+    }
+    .center{
+        margin: auto;
+        display: inline-flex;
+        height: 45px;
+    }
+    .img{
+        padding-right: 40px;
+    }
+    .img:hover{
+        filter: brightness(50%);
+    }
+    .a{
+        background-image: url(./img/img1.jpg);
+        height: 1000px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+    .title{
+        padding-top: 100px;
+        font-size: 50px;
+        font-weight: bold;
+        text-align: center;
+        filter: drop-shadow(5px 5px 20px black);
+    }
+    .speed{
+        font-size: 30px;
+        font-weight: bold;
+        text-align: center;
+        line-height: 100px;
+    }
+    .money{
+        font-size: 15px;
+        color: darkslategray;
+        text-align: center;
+    }
+    .flex{
+        display: inline-flex;
+    }
+    .underline{
+        font-size: 30px;
+        text-align: center;
+    }
+    .underline{
+        font-size: 30px;
+        color: dodgerblue;
+        padding: 10px 0;
+    }
+    .first{
+        padding-left:750px;
+    }
+    .second{
+        padding-left: 200px;
+    }
+    .underline:hover {
+        text-decoration: underline;
+        cursor: pointer;
+    }
+    .b{
+        background-image: url(./img/img2.jpg);
+        background-size: 100% 100%;
+        height: 1000px;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+    .watch{
+        padding-top: 100px;
+        filter: drop-shadow(5px 5px 20px white);
+        font-size: 75px;
+        font-weight: bolder;
+        text-align: center;
+        color: white;
+    }
+    .series{
+        color: red;
+        font-size: 50px;
+        text-align: center;
+        line-height: 100px;
+    }
+    .unity{
+        color: white;
+        font-size: 30px;
+        text-align: center;
+    }
+    .c{
+        background-image: url(./img/img3.jpg);
+        background-size: 100% 100%;
+        height: 1000px;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+    .time{
+        color: white;
+        font-size: 50px;
+        line-height: 100px;
+        text-align: center;
+    }
+    .d{
+        background-image: url(./img/img4.jpg);
+        background-size: 100% 100%;
+        width: 100%;
+        height: 500px;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+    .e{
+        background-image: url(./img/img5.jpg);
+        background-size: 100% 100%;
+        width: 100%;
+        height: 500px;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+    .container{
+        display: flex;
+    }
+    .iPhone{
+        font-size: 50px;
+        font-weight: bold;
+        text-align: center;
+        filter: drop-shadow(5px 5px 20px black);
+    }
+    .strong{
+        font-size: 50px;
+        text-align: center;
+    }
+    .mac{
+        filter: drop-shadow(5px 5px 20px white);
+        font-size: 75px;
+        font-weight: bolder;
+        text-align: center;
+        color: white;
+    }
+    .air{
+        color: white;
+        font-size: 50px;
+        text-align: center;
+    }
+    .f{
+        background-image: url(./img/img6.jpg);
+        background-size: 100% 100%;
+        width: 100%;
+        height: 500px;
+        background-repeat: no-repeat;
+        background-position: center center;
+        filter: sepia(80%);
+    }
+    .g{
+        background-image: url(./img/img7.jpg);
+        background-size: 100% 100%;
+        width: 100%;
+        height: 500px;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+    .airpods{
+        font-size: 50px;
+        font-weight: bold;
+        filter: drop-shadow(5px 5px 20px gold);
+        text-align: center;
+    }
+</style>
+<body>
+    <div class="fixed ">
+        <div class="center">
+            <div class="img"><img src="img/logo.svg"></div>
+            <div class="top">Mac</div>
+            <div class="top">iPad</div>
+            <div class="top">iPhone</div>
+            <div class="top">Watch</div>
+            <div class="top">Music</div>
+            <div class="top">고객지원</div>
+        </div>
+    </div>
+    <div class="a bigbox">
+        <div class="box">
+            <div class="title">iPhone 12</div>
+            <div class="speed">스피드 그 이상의 스피드</div>
+            <div class="money">가격은 ₩950,000부터(보상판매* 미적용)</div>
+            <div class="flex">
+                <div class="underline first">더 알아보기 ></div>
+                <div class="underline second">구입하기 ></div>
+            </div>
+        </div>
+    </div>
+    <div class="b bigbox">
+        <div box>
+            <div class="watch">WATCH</div>
+            <div class="series">Series 6</div>
+            <div class="unity">Black Unity Collection을 소개합니다.</div>
+            <div class="flex">
+                <div class="underline first">더 알아보기 ></div>
+                <div class="underline second">구입하기 ></div>
+            </div>
+        </div>
+    </div>
+    <div class="c bigbox">
+        <div class="watch">iPhone 12 Pro</div>
+        <div class="time">도약의 시간</div>
+        <div class="money">가격은 ₩1,350,000부터(보상 판매*미적용)</div>
+        <div class="flex">
+            <div class="underline first">더 알아보기 ></div>
+            <div class="underline second">구입하기 ></div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="d">
+            <div class="iPhone">iPhone 12</div>
+            <div class="strong">강력하다 다채롭다</div>
+        </div>
+        <div class="e">
+            <div class="mac">Mac book</div>
+            <div class="air">Air의 흐름을 바꾸다</div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="f">
+            <div class="airpods">AirPods Max</div>
+        </div>
+        <div class="g">
+            <div class="title">사랑하는 사람에게 apple을</div>
+        </div>
+    </div>
+</body>
+</html>     

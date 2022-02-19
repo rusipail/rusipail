@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    input{
+        border: 10px solid black;
+        font-size: 20px;
+        width: 50px;
+        height: 50px;
+    }
+</style>
+<body>
+    <h1>각각 위, 아래 (왼쪽, 오른쪽) 보더가 바뀝니다.</h1>
+    <input type="color" value="#ff0000" oninput="this.style.borderTopColor = this.value">
+    <input type="color" value="#00ff00" oninput="this.style.borderBottomColor = this.value">
+    <input type="color" value="#0000ff" oninput="this.style.borderColor = `black ${this.value}`">
+</body>
+</html>

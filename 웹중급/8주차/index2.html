@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스네이크 게임</title>
+    <style>
+        body {
+            margin: 0;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .map {
+            position: relative;
+            width: 600px;
+            height: 600px;
+            border: 1px solid black;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        #sub-container {
+            height: 600px;
+            padding: 0 10px;
+        }
+
+        .map .box {
+            position: relative;
+            display: flex;
+            justify-content: flex-start;
+            border: 1px solid #dedede;
+            box-sizing: border-box;
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+        }
+
+        .map .box.ArrowLeft,
+        .map .box.head.ArrowRight {
+            flex-direction: row;
+        }
+
+        .map .box.ArrowRight,
+        .map .box.head.ArrowLeft {
+            flex-direction: row-reverse;
+        }
+
+        .map .box.ArrowUp,
+        .map .box.head.ArrowDown {
+            flex-direction: column;
+        }
+
+        .map .box.ArrowDown,
+        .map .box.head.ArrowUp {
+            flex-direction: column-reverse;
+        }
+
+        .map .box .inner-box {
+            background-color: green;
+        }
+
+        .map .box.apple::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background: url('./img/apple.png');
+            background-size: contain;
+        }
+
+        .snake {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<!-- 
+    힌트
+    <div class="box"></div> 태그 => 맵 한칸
+    <div class="box">
+        <div class="inner-box"></div> => 뱀 몸통 (초록색)
+    </div>
+ -->
+
+<body>
+    <div id="container">
+        <div class="map">
+
+        </div>
+    </div>
+    <div id="sub-container">
+        <div>점수 : <span id="score"></span></div>
+    </div>
+    <script>
+        /*
+            CSS : flex-basis, flex-direction, justify-content
+            JS : array.includes, while-break
+        */
+
+        /*
+            주의사항!! 
+            1. 뱀의 머리가 몸통과 겹치면 게임오버
+            2. 사과가 생성될때 뱀의 몸통과 겹치게 생성되면 안됨
+            3. 사과를 먹으면 뱀이 한칸 길어져야 함
+            4. 뱀이 방향을 바꿀때 가던방향의 반대방향으로는 갈 수 없음.
+            (ex. 오른쪽으로 가다가 왼쪽으로 갈 수 없음)
+            (오른쪽으로 가고 있었다면, 오른쪽, 위, 아래 세 방향으로만 방향전환 가능)
+        */
+
+        /*
+            뱀 이동 구현 꿀팁
+            - 뱀의 각 몸통 위치를 배열에 저장하고
+            - 뱀이 움직여야 할때, 꼬리를 삭제하고 머리를 새로 추가합니다. (pop, unshift)
+            - 문제의 Easy 버전부터 구현해보고 Normal 버전도 구현해보세요
+        */
+
+        /* 아래 변수들은 필요하면 쓰고 필요없으면 지워도 됩니다 */
+        const SPEED = 10;
+        const W = 40, H = 40;
+        const boxes = []
+        const innerBoxes = []
+
+        let currentDirection = 'ArrowRight'
+        let nextDirection = 'ArrowRight'
+
+        // <- 머리방향
+        // [[x좌표, y좌표], ...]
+        let bodyPos = [[1, 1], [2, 1], [3, 1]]
+        //let bebodyPos = [[1, 1], [2, 1], [3, 1]]
+
+        let headPos = null
+        let tailPos = null
+        let applePos = null
+        let snakeCount = 0;
+
+        const map = document.querySelector('#container .map')
+        const score = document.querySelector('#score')
+        const body = document.querySelector('body')
+
+        const dead = () => {
+            alert(`꽥 죽음 점수: ${bodyPos.length}`)
+        }
+
+        let frame = 0
+        const step = () => {
+            if (frame % SPEED == 0) {
+                const head = bodyPos[bodyPos.length - 1].concat();
+                const tail = bodyPos[0].concat
+                let snakehead = document.querySelector(`.cl${head[0]}${head[1]}`)
+                let snaketail = document.querySelector(`.cl${tail[0]}${tail[1]}`)
+                snakehead.classList.add('snake')
+                
+                if(nextDirection === 'ArrowRight' && currentDirection !== 'ArrowLeft'){
+                    head[0] += 1;
+                    tail[0] += 1;
+                    console.log(1)
+                } else if(nextDirection === 'ArrowLeft' && currentDirection !== 'ArrowRight'){
+                    head[0] -= 1;
+                    tail[0] -= 1;
+                    console.log(2)
+                } else if(nextDirection === 'ArrowUp' && currentDirection !== 'ArrowDown'){
+                    head[1] += 1;
+                    tail[1] += 1;
+                    console.log(3)
+                } else if(nextDirection === 'ArrowDown' && currentDirection !== 'ArrowUp'){
+                    head[1] -= 1;
+                    tail[1] -= 1;
+                    console.log(4)
+                }
+                //snaketail.classList.remove('snake')
+                currentDirection = nextDirection;
+
+            } else {
+                // 나머지 frame 에는 부드럽게 움직이기 위한 코드 추가 (Normal 버전용)
+
+            }
+            frame++
+
+            score.innerHTML = bodyPos.length
+
+            requestAnimationFrame(step)
+        }
+
+        const init = () => {
+            for (let i = 0; i < 15; i++) {
+                boxes.push([]);
+                for (let j = 0; j < 15; j++) {
+                    const box = document.createElement('div');
+                    const div = document.createElement('div');
+                    div.dataset.x = Number(j);
+                    div.dataset.y = Number(i);
+                    box.classList.add(`c${j}${i}`);
+                    div.classList.add(`cl${j}${i}`)
+                    box.classList.add('box');
+                    div.classList.add('inner-box')
+                    map.appendChild(box);
+                    box.appendChild(div)
+                    boxes[i].push(0);
+                }
+            };
+            // box 생성
+
+            body.onkeydown = (e) => {
+                if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].indexOf(e.key) !== -1) {
+                    nextDirection = e.key;
+                }
+            }
+            // keydown 이벤트 추가
+
+
+            const makeApple = () => {
+                let appleX = Number(Math.floor(Math.random() * 15));
+                let appleY = Number(Math.floor(Math.random() * 15));
+                console.log(appleX)
+                console.log(appleY)
+                const div = document.querySelector(`.c${appleX}${appleY}`)
+                console.log(div)
+                div.classList.add('apple')
+                console.log(div)
+                boxes[appleY].splice([appleX], 1, 1);
+            }
+            makeApple();
+            // 사과 생성
+
+            requestAnimationFrame(step)
+        }
+        init()
+
+    </script>
+</body>
+
+</html>

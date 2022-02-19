@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            color: transparent;
+        }
+        .html ~ .red{
+            color: red;
+        }
+        .css ~ .green{
+            color: green;
+        }
+        .js ~ .blue{
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        클래스만 사용하기!
+    </h1>
+    <select class="none" onchange="this.classList.value = ''; this.classList.add(this.value);">
+        <option value="" selected disabled>선택하세요</option>
+        <option value="html">Red</option>
+        <option value="css">Green</option>
+        <option value="js">Blue</option>
+    </select>
+    <div class="red">HTML</div>
+    <div class="green">CSS</div>
+    <div class="blue">Javascript</div>
+</body>
+</html>

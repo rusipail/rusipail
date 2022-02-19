@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+    <style>
+        .container{
+            width: 200px;
+            height: 200px;
+            overflow: auto;
+            display: inline-block;
+            border: 1px solid black;
+        }
+        .box{
+            width: 40px;
+            height: 40px;
+            border: 2px solid black;
+            display: inline-block;
+            margin: 4px;
+        }
+        .blue{
+            background-color: blue;
+        }
+        .yellow{
+            background-color: yellow;
+            left: 40px;
+            top: 40px;
+        }
+        .static{
+            position: static;
+        }
+        .relative{
+            position: relative;
+        }
+        .absolute{
+            position: absolute;
+        }
+        .fixed{
+            position: fixed;    
+        }
+        .sticky{
+            position: sticky;
+        }
+    </style>
+<body>
+    <div class="container">
+        position: static<br>
+        아래 파란박스는 position 속성 설정 안함, 노란색 박스만 position 설정함.
+        <div>
+            <div class="box blue"></div>
+            <div class="box yellow static"></div>
+            <div class="box blue"></div>
+        </div>
+        내용이 많아야 비교가 되니까....<br>
+        내용이 많아야 비교가 되니까....<br>
+        내용이 많아야 비교가 되니까....<br>
+        내용이 많아야 비교가 되니까....<br>
+        내용이 많아야 비교가 되니까....<br>
+    </div>
+    <div class="container">
+        position: relative<br>
+        아래 파란박스는 position 속성 설정 안함, 노란색 박스만 position 설정함.
+        <div>
+        <div class="box blue"></div>
+        <div class="box yellow relative"></div>
+        <div class="box blue"></div>
+        </div>
+        내용이 많아야 비교가 되니까....<br>
+        내용이 많아야 비교가 되니까....<br>
+        내용이 많아야 비교가 되니까....<br>
+        내용이 많아야 비교가 되니까....<br>
+        내용이 많아야 비교가 되니까....<br>
+        내용이 많아야 비교가 되니까....<br>
+    </div>
+    <div class="container relative">
+        position: ablsolute<br>
+        아래 파란박스는 position 속성 설정 안함, 노란색 박스만 position 설정함.
+        <div>
+        <div class="box blue"></div>
+        <div class="box yellow ablsolute"></div>
+        <div class="box blue"></div>
+        </div>
+        내용이 많아야 비교가 되니까....<br>
+        내용이 많아야 비교가 되니까....<br>
+        내용이 많아야 비교가 되니까....<br>
+        내용이 많아야 비교가 되니까....<br>
+        내용이 많아야 비교가 되니까....<br>
+        내용이 많아야 비교가 되니까....<br>
+    </div>
+    <div class="container">
+        position: fixed<br>
+        아래 파란박스는 position 속성 설정 안함, 노란색 박스만 position 설정함.
+        <div>
+        <div class="box blue"></div>
+        <div class="box yellow fixed"></div>
+        <div class="box blue"></div>
+        </div>
+        내용이 많아야 비교가 되니까....<br>
+        내용이 많아야 비교가 되니까....<br>
+        내용이 많아야 비교가 되니까....<br>
+        내용이 많아야 비교가 되니까....<br>
+        내용이 많아야 비교가 되니까....<br>
+        내용이 많아야 비교가 되니까....<br>
+    </div>
+    <div class="container">
+        position: sticky<br>
+        아래 파란박스는 position 속성 설정 안함, 노란색 박스만 position 설정함.
+        <div>
+        <div class="box blue"></div>
+        <div class="box yellow sticky"></div>
+        <div class="box blue"></div>s
+        </div>
+        내용이 많아야 비교가 되니까....<br>
+        내용이 많아야 비교가 되니까....<br>
+        내용이 많아야 비교가 되니까....<br>
+        내용이 많아야 비교가 되니까....<br>
+        내용이 많아야 비교가 되니까....<br>
+        내용이 많아야 비교가 되니까....<br>
+    </div>
+</body>
+</html>

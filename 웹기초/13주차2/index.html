@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        box-sizing: border-box;
+    }
+    button{
+        background-color: white;
+        font-size: 20px;
+    }
+    table{
+        border-collapse: collapse;
+        width: 200px;
+    }
+    td{
+        border: 1px solid black;
+        width: 100px;
+        text-align: center;
+    }
+    td:active{
+        background-color: gray;
+    }
+</style>
+<body>
+    <table>
+        <tr>
+            <td colspan="2">td들을 클릭해봐</td>
+        </tr>
+        <tr>
+            <td onclick="this.innerHTML = prompt('텍스트를 입력해봐')">나도</td>
+            <td onclick="this.innerHTML = prompt('텍스트를 입력해봐')">나도</td>
+        </tr>
+        <tr>
+            <td onclick="this.innerHTML = prompt('텍스트를 입력해봐')">나도</td>
+            <td onclick="this.innerHTML = prompt('텍스트를 입력해봐')">나도</td>
+        </tr>
+        <tr>
+            <td onclick="this.innerHTML = prompt('텍스트를 입력해봐')">나도</td>
+            <td onclick="this.innerHTML = prompt('텍스트를 입력해봐')">나도</td>
+        </tr>
+        <tr>
+            <td onclick="this.innerHTML = prompt('텍스트를 입력해봐')">나도</td>
+            <td onclick="this.innerHTML = prompt('텍스트를 입력해봐')">나도</td>
+        </tr>
+    </table>
+</body>
+</html>

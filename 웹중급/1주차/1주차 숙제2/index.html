@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container>span {
+            display: inline-block;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="number" placeholder="최대 숫자" id="maxNum">
+    <input type="number" placeholder="최대 짝 숫자" id="maxClapNum">
+    <button id="btn">시작</button>
+    <div class="container"></div>
+    <script>
+        const maxNum = document.querySelector('#maxNum');
+        const maxClapNum = document.querySelector('#maxClapNum');
+        const container = document.querySelector('.container');
+
+        const main = () =>{
+            container.innerHTML = '';
+            const max = parseInt(maxNum.value);
+            const maxClap = parseInt(maxClapNum.value);
+            let count = 0;
+            for(let i = 1; i <= max; i++){
+                const span = document.createElement('span');
+                if(String(i).includes('3') ||  String(i).includes('6') || String(i).includes('9')){
+                    span.innerHTML = '짝'
+                    count++;
+                } else {
+                    span.innerHTML = i;
+                }
+                container.appendChild(span);
+                if(count === maxClap) break;
+            }
+        }
+            // 여기에 코드 작성
+            // 369 게임 구현. 3, 6, 9 중 하나 이상이 들어가면 숫자 대신 "짝" 이라는 글자를 출력
+
+        document.querySelector('#btn').onclick = main;
+    </script>
+</body>
+
+</html>

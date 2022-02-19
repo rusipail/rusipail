@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input[type="date"]:focus{
+            outline: none;
+        }
+
+        input[type="date"]:valid {
+            border: 2px solid green;
+        }
+
+        input[type="date"]:invalid {
+            border: 2px solid red;
+        }
+
+        #result{
+            padding: 10px 0;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>당신의 생일을 입력해주세요</h3>
+    <input type="date" required>
+    <div id="result"></div>
+    <script>
+        
+        const inp = document.querySelector(`input[type="date"]`);
+        const result = document.querySelector('#result');
+
+        const set = ['년', '월', '일'];
+        const grades = [8, '초1', 9, '초2', 10, '초3', 11, '초4', 12, '초5', 13, '초6', 
+                        14, '중1', 15, '중2', 16, '중3', 17, '고1', 18, '고2', 19, '고3']
+
+        inp.oninput = (e) => {
+            const now = new Date();
+            now.setHours(9, 0, 0, 0); 
+            const birth = new Date(inp.value);
+            
+            if(birth >= now){
+                result.innerHTML = '당신은 아직 태어나지 않았습니다.';
+                return;
+            }
+            
+            let str = `당신은 지금까지 ${(now - birth) / (24 * 3600 * 1000)}일을 살았고,`;
+            const age = now.getFullYear() - birth.getFullYear() + 1;
+            const idx = grades.indexOf(age);
+            if(idx > -1){
+                str += `${age}살 ${grades[inx + 1]}입니다.`; 
+            } else{
+                if(age > 19){
+                    str += `${age}살 성인입니다.`;
+                } else {
+                    str =+ `${age}살 어린이입니다.`;
+                }
+            }
+            result.innerHTML = str;
+        }
+    </script>
+</body>
+
+</html>

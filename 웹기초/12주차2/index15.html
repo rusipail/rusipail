@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .title{
+        color: red;
+        font-size: 70px;
+        font-weight: 100px;
+        text-align: center;
+        filter: drop-shadow(5px 5px 5px black);
+    }
+    .flex{
+        display: inline-flex;
+        width: 80%;
+        position: relative;
+        left: 200px;
+    }
+    .img{
+        background-image: url(/img/seoul.png);
+        width: 400px;
+        height: 500px;
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+    .text{
+        text-align: center;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    .seoul{
+        margin: 10px;
+        background-image: url(/img/seoul2.webp);
+        display: flex;
+   	    align-items: center;
+        justify-content: center;
+        height: 300px;
+        background-size: cover;
+        background-position: center;
+        filter: saturate(200%);
+    }
+    .textbox{
+        backdrop-filter: blur(10px);
+        padding: 80px 700px;
+        color: white;
+        font-size: 70px;
+        font-weight: bold;
+    }
+    .first:active{
+        filter: opacity(25%);
+    }
+    .second:active{
+        filter: brightness(200%);
+    }
+    .third:active{
+        filter: invert(100%);
+    }
+    .fourth:active{
+        filter: contrast(300%);
+    }
+</style>
+<body>
+     <div class="title">CSS filter를 배워보자!</div>
+     <div class="flex">
+         <div class="one">
+             <div class="img first"></div>
+             <div class="text">투명하게</div>
+         </div>
+         <div class="two">
+             <div class="img second"></div>
+             <div class="text">밝게</div>
+         </div>
+         <div class="three">
+             <div class="img third"></div>
+             <div class="text">반전</div>
+         </div>
+         <div class="four">
+             <div class="img fourth"></div>
+             <div class="text">대비</div>
+         </div>
+     </div>
+     <div class="seoul">
+         <div class="textbox">SOEUL</div>
+     </div>
+</body>
+</html>

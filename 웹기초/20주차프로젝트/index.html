@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            user-select: none;
+        }
+        body{
+            margin: 0;
+            text-align: center;
+        }
+        #container{
+            position: relative;
+            display: inline-block;
+            box-sizing: border-box;
+            border:5px solid black;
+            font-size: 50px;
+            font-weight: bolder;
+            text-align: center;
+            height: 50vh;
+            width: 100vw;
+            max-width: 600px;
+            padding: 20px;
+            transition: all 0.5s;
+        }
+
+        #dock {
+            position: fixed;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            transform: translateY(80%);
+            transition: all 0.3s;
+        }
+
+        #dock:hover {
+            transform: translateY(-10%);
+            bottom: 10px;
+        }
+
+        #dock>ul {
+            padding: 5px;
+            margin: 0;
+            /* fit-content는 안에 있는 태그들의 크기에 맞춰서 자동으로 크기를 설정해준다. */
+            width: fit-content;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 5px solid lightgray;
+        }
+
+        #dock li {
+            width: 80px;
+            height: 80px;
+            list-style: none;
+            margin: 0 2px;
+            cursor: pointer;
+            transition: transform .2s ease;
+            border-radius: 10px;
+        }
+        #menu{
+            position: absolute;
+            left: 530px;
+            width: 50px;
+            height: 50px;
+            top: 10px;
+            font-size: 40px;
+        }
+        #text{
+            position: absolute;
+            left: 45px;
+            width: 500px;
+            height: 200px;
+        }
+        #dock > ul > li:nth-child(1){
+            background-color: red;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+        }
+        #dock > ul > li:nth-child(2){
+            background-color: orange;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+        }
+        #dock > ul > li:nth-child(3){
+            background-color: green;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+        }
+        #dock > ul > li:nth-child(4){
+            background-color: blue;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+        }
+        #dock > ul > li:nth-child(5){
+            background-color: orchid;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+        }
+        #dock > ul > li:nth-child(6){
+            background-color: gray;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+        }
+        #dock .double{
+            width: 160px;
+            height: 160px;
+            border: 5px solid black;
+        }
+        #dock .next{
+            width: 120px;
+            height: 120px;
+        }
+        #dock .before{
+            width: 120px;
+            height: 120px;
+        }
+        .close{
+            transform: scale(0);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container" class="close">
+        <button id="menu">×</button>
+        <div id="text">item1</div>
+    </div>
+    <div id="dock">
+        <ul>
+            <li data-id="item1"></li>
+            <li data-id="item2"></li>
+            <li data-id="item3"></li>
+            <li data-id="item4"></li>
+            <li data-id="item5"></li>
+            <li data-id="item6"></li>
+        </ul>
+    </div>
+    <!--<ul>
+        <li>Mac OS에 있는 Dock 메뉴를 구현한다.</li>
+        <li>#dock에 마우스를 올렸을 때 dock메뉴 전체가 위로 80% 정도 올라온다.</li>
+        <li>총 6개의 메뉴가 있고 각 메뉴에 마우스를 올렸을 때 해당 메뉴는 2배 커지고 양옆의 메뉴는 1.5배 커지도록 구현한다.</li>
+        <li>또한 각 메뉴를 보여줄 수 있게 한다. (hint: 가상 엘레멘트 활용하기)</li>
+        <li>각 메뉴를 클릭하면 .container에 해당 메뉴가 어떤 건지 보여주고 글씨 색을 해당 메뉴와 같은 색으로 보여준다(hint: data- 속성 활용)</li>
+    </ul>!-->
+    <script>
+        let next = null;
+        const dock = document.querySelector('#dock');
+        const li1 = document.querySelector("#dock > ul > li:nth-child(1)");
+        const li2 = document.querySelector("#dock > ul > li:nth-child(2)");
+        const li3 = document.querySelector("#dock > ul > li:nth-child(3)");
+        const li4 = document.querySelector("#dock > ul > li:nth-child(4)");
+        const li5 = document.querySelector("#dock > ul > li:nth-child(5)");
+        const li6 = document.querySelector("#dock > ul > li:nth-child(6)");
+        const div = document.querySelector("body > div");
+        const text = document.querySelector('#text');
+        const menu = document.querySelector('#menu');
+
+        menu.onclick = (event) =>{
+            div.classList.add('close');
+        }
+
+        li1.onclick = (event) =>{
+            div.classList.remove('close');
+            text.innerHTML = 'item1';
+            text.style.color = 'red';
+        }
+        li2.onclick = (event) =>{
+            div.classList.remove('close');
+            text.innerHTML = 'item2';
+            text.style.color = 'orange';
+        }
+        li3.onclick = (event) =>{
+            div.classList.remove('close');
+            text.innerHTML = 'item3';
+            text.style.color = 'green';
+        }
+        li4.onclick = (event) =>{
+            div.classList.remove('close');
+            text.innerHTML = 'item4';
+            text.style.color = 'blue';
+        }
+        li5.onclick = (event) =>{
+            div.classList.remove('close');
+            text.innerHTML = 'item5';
+            text.style.color = 'orchid';
+        }
+        li6.onclick = (event) =>{
+            div.classList.remove('close');
+            text.innerHTML = 'item6';
+            text.style.color = 'gray';
+        }
+        
+        li1.onmouseover = (event) =>{
+            event.target.classList.add('double');
+            li1.nextElementSibling.classList.add('next');
+            li1.innerHTML = '1번 메뉴';
+            
+        };
+        li1.onmouseout = (event) =>{
+            event.target.classList.remove('double');
+            li1.nextElementSibling.classList.remove('next');
+            li1.innerHTML = '';
+        }
+        li2.onmouseover = (event) =>{
+            event.target.classList.add('double');
+            li2.nextElementSibling.classList.add('next');
+            li2.previousElementSibling.classList.add('before');
+            li2.innerHTML = '2번 메뉴';
+        };
+        li2.onmouseout = (event) =>{
+            event.target.classList.remove('double');
+            li2.nextElementSibling.classList.remove('next');
+            li2.previousElementSibling.classList.remove('before');
+            li2.innerHTML = '';
+        }
+        li3.onmouseover = (event) =>{
+            event.target.classList.add('double');
+            li3.nextElementSibling.classList.add('next');
+            li3.previousElementSibling.classList.add('before');
+            li3.innerHTML = '3번 메뉴';
+        };
+        li3.onmouseout = (event) =>{
+            event.target.classList.remove('double');
+            li3.nextElementSibling.classList.remove('next');
+            li3.previousElementSibling.classList.remove('before');
+            li3.innerHTML = '';
+        }
+        li4.onmouseover = (event) =>{
+            event.target.classList.add('double');
+            li4.nextElementSibling.classList.add('next');
+            li4.previousElementSibling.classList.add('before');
+            li4.innerHTML = '4번 메뉴';
+        };
+        li4.onmouseout = (event) =>{
+            event.target.classList.remove('double');
+            li4.nextElementSibling.classList.remove('next');
+            li4.previousElementSibling.classList.remove('before');
+            li4.innerHTML = '';
+        }
+        li5.onmouseover = (event) =>{
+            event.target.classList.add('double');
+            li5.nextElementSibling.classList.add('next');
+            li5.previousElementSibling.classList.add('before');
+            li5.innerHTML = '5번 메뉴';
+        };
+        li5.onmouseout = (event) =>{
+            event.target.classList.remove('double');
+            li5.nextElementSibling.classList.remove('next');
+            li5.previousElementSibling.classList.remove('before');
+            li5.innerHTML = '';
+        }
+        li6.onmouseover = (event) =>{
+            event.target.classList.add('double');
+            li6.previousElementSibling.classList.add('before');
+            li6.innerHTML = '6번 메뉴';
+        };
+        li6.onmouseout = (event) =>{
+            event.target.classList.remove('double');
+            li6.previousElementSibling.classList.remove('before');
+            li6.innerHTML = '';
+        }
+    </script>
+</body>
+</html>

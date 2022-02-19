@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h1>박스모델에 대해 알아바자</h1>
+    <h1>(너비와 높이는 모두 200px로 고정)</h1>
+    <style>
+        .layout{
+            display: inline-block;
+        }
+        .box{
+            width: 200px;
+            height: 200px;
+            font-size: 20px;
+        }
+        .box1{
+            background-color: dodgerblue;
+        }
+        .box2{
+            background-color: gold;
+            border: 5px solid black;
+        }
+        .box3{
+            background-color: aquamarine;
+            padding: 50px;
+        }
+        .box4{
+            background-color: green;
+            padding: 50px;
+            box-sizing: border-box;
+        }
+        .box5{
+            background-color: orange;
+            margin: 50px;
+        }
+        .desc{
+            text-align: center;
+        }
+    </style>
+    <div class="layout">
+        <div class="box box1">200x200</div>
+        <div class="desc">width: 200px, height: 200px</div>
+    </div>
+    <div class="layout">
+        <div class="box box2">210x210</div>
+        <div class="desc">Border 5px 있음</div>
+    </div>
+    <div class="layout">
+        <div class="box box3">300x300</div>
+        <div class="desc">Padding 50px 있음</div>
+    </div>
+    <div class="layout">
+        <div class="box box4">210x210</div>
+        <div class="desc">Padding 있음. box-sizing: border-box</div>
+    </div>
+    <div class="layout">
+        <div class="box box5">210x210</div>
+        <div class="desc">Margin 있음</div>
+    </div>
+    
+</body>
+</html>

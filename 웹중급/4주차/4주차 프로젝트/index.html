@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .d-flex {
+            display: flex;
+        }
+
+        .p-2 {
+            padding: 5px;
+        }
+
+        .my-2 {
+            margin: 5px 0;
+        }
+
+        .side-nav {
+            flex-direction: column;
+            flex-basis: 30%;
+            border-right: 1px solid black;
+        }
+
+        .container {
+            flex-basis: 70%;
+            flex-direction: column;
+        }
+
+        .container>div {
+            width: 100%;
+            height: 50%;
+            overflow: auto;
+        }
+
+        .container>div:nth-child(1) {
+            border-bottom: 1px solid black;
+        }
+
+        .folder {
+            width: 100px;
+            height: 100px;
+            display: inline-block;
+            background-image: url(./img/folder.png);
+            background-size: 90px 90px;
+            background-repeat: no-repeat;
+            background-position-y: 10px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: bolder;
+        }
+
+        .active {
+            color: dodgerblue;
+            font-weight: bold;
+            transform: scale(1.1);
+        }
+
+        #clipboard {
+            width: 100%;
+            height: 200px;
+            border: 1px solid black;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+
+<body class="d-flex">
+    <div class="side-nav d-flex p-2">
+        <button class="p-2 my-2">추가</button>
+        <button class="p-2 my-2">삭제</button>
+        <button class="p-2 my-2">복사</button>
+        <button class="p-2 my-2">잘라내기</button>
+        <div class="p-2" id="clipboard">클립보드</div>
+        <button hidden class="p-2 my-2" id="cut">이동</button>
+    </div>
+    <div class="container d-flex">
+        <div id="first" class="p-2">추가 버튼을 눌러 폴더를 생성하세요</div>
+        <div id="second" class="p-2">여기에 이동한 폴더들이 나타납니다</div>
+    </div>
+    <script>
+       
+        const first = document.querySelector('#first');
+        const second = document.querySelector('#second');
+        const clipboard = document.querySelector('#clipboard');
+        const sideNav = document.querySelector('.side-nav');
+
+        let folderName = 0
+
+        let folders = [];   
+        let newFolders = [] 
+        let selectedFolders = []  
+        let cutFolders = []        
+      
+
+        const render = (arr, container) => {
+            container.innerHTML = '';
+            for(let i = 0; i < arr.length; i++){
+                const f = arr[i]
+                const span = document.createElement('span');
+                span.innerHTML = f
+                span.classList.add('folder');
+                container.appendChild(span);
+            }
+        }
+
+        first.onclick = e => {
+            const tar = e.target;
+            if (tar.classList.contains('folder')) {
+                if (tar.classList.contains('active')) {
+                    const idx = selectedFolders.indexOf(tar.innerHTML)
+                    console.log(idx)
+                    selectedFolders.splice(idx, 1)
+                } else {
+                    selectedFolders.push(tar.innerHTML)
+                }
+                tar.classList.toggle('active');
+            }
+        }
+
+        sideNav.onclick = e => {
+            if (e.target.nodeName === 'BUTTON') {
+                const btn = e.target;
+                if (btn.innerHTML === '추가') {
+                    selectedFolders = []
+                    folders.push(String(folderName++));
+                    render(folders, first)
+
+                } else if (btn.innerHTML === '삭제') {
+                    if(selectedFolders.length === 0) {
+                        folders.pop()
+                    } else {
+                        for(let i = 0; i < selectedFolders.length; i ++) {
+                            const idx = folders.indexOf(selectedFolders[i])
+                            folders.splice(idx, 1)
+                        }
+                        selectedFolders = [];
+                    }
+                    render(folders, first); 
+
+                } else if (btn.innerHTML === '복사') {
+                    if (selectedFolders.length === 0) {
+                        alert('복사할 파일이 없습니다.')
+                        return false;
+                    } else{
+                        cutFolders = selectedFolders.concat();
+                        render(cutFolders, clipboard)
+                        
+                    }
+
+                } else if (btn.innerHTML === '잘라내기') {
+                    if (selectedFolders.length === 0) {
+                        alert('잘라낼 파일이 없습니다.')
+                        return false;
+                    } else if(selectedFolders.length > 0){
+                        cutFolders = selectedFolders.concat();
+                        render(cutFolders, clipboard)
+                        for(let i = 0; i < selectedFolders.length; i ++) {
+                            const idx = folders.indexOf(selectedFolders[i])
+                            folders.splice(idx, 1)
+                        }
+                        render(folders, first);
+                        selectedFolders = [];
+                    } else{
+                        cutFolders = selectedFolders.concat();
+                    }
+
+                } else if (btn.innerHTML === '이동') {
+                    newFolders = cutFolders.concat();
+                    render(newFolders, second)
+                    cutFolders.splice(0)
+                    render(cutFolders, clipboard)
+                }
+
+                
+                if (clipboard.querySelector('span')) {
+                    document.querySelector('#cut').hidden = false
+                } else {
+                    document.querySelector('#cut').hidden = true
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

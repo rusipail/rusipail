@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>보물찾기</title>
+    <style>
+        table {
+            border-collapse: separate;
+        }
+
+        td:not(.gold-num,.bomb-num) {
+            width: 60px;
+            height: 60px;
+            border: 1px solid black;
+            text-align: center;
+            line-height: 60px;
+            background-color: black;
+            cursor: pointer;
+        }
+
+        td.show {
+            background-color: white;
+        }
+
+        tr:not(:nth-child(n + 3)) td {
+            height: 16px;
+            border: none;
+            color: white;
+            text-align: center;
+            font-size: 14px;
+            line-height: 1;
+        }
+        
+        td:not(:nth-child(n + 3)) {
+            width: 16px;
+            border: none;
+            color: white;
+            text-align: center;
+            font-size: 14px;
+            line-height: 1;
+        }
+
+        tr:not(:nth-child(n + 3)) td:not(:nth-child(n + 3)) {
+            background-color: transparent;
+        }
+
+        td.gold-num:not(.hide) {
+            background-color: blue;
+        }
+        td.bomb-num:not(.hide) {
+            background-color: red;
+        }
+
+        td{
+            position:relative;
+        }
+
+        td.show::before{
+            position:absolute;
+            left:50%;
+            top:50%;
+            transform:translate(-50%, -50%);
+            font-size:32px;
+        }
+
+        td.gold.show::before{
+            content:"💰";
+        }
+
+        td.bomb.show::before{
+            content:"💣";
+        }
+        
+        td.expl.show::before{
+            content:"💥";
+        }
+
+        #canvas:not(.die) > button{
+            display: none;
+        }
+       .hide{
+            background-color: white;
+        }
+
+    </style>
+</head>
+
+<body>
+    <h1>보물찾기</h1>
+    <div>
+        각 칸은 10% 확률로 폭탄, 20% 확률로 보물이 들어있다.<br>
+        파란색 칸은 해당 행/열 에 있는 보물의 개수를 나타내고<br>
+        빨간색 칸은 해당 행/열 에 있는 폭탄의 개수를 나타낸다.<br><br>
+    </div>
+    <div id="canvas">
+        <button>다시 시작하시겠습니까?</button><br>
+        <table>
+            <tbody></tbody>
+        </table>
+    </div>
+    <script>
+        const WIDTH = 6, HEIGHT = 6;
+        const BOMB = 'bomb', GOLD = 'gold', NONE = 'none';
+        const table = document.querySelector('tbody');
+        const button = document.querySelector('#canvas > button');
+        const canvas = document.querySelector('#canvas');
+
+        /*
+            td[i][j] -> i 번째 줄, j 번째 칸
+            td[0][j] -> 보물 표시 칸
+            td[1][j] -> 폭탄 표시 칸
+            td[i][0] -> 보물 표시 칸
+            td[i][1] -> 폭탄 표시 칸
+
+            map[i][j] -> td[i + 2][j + 2] 칸에 표시
+        */
+        let map = [], tdList = []
+        let count = 0;
+        let goldC = 0;
+
+        const initMap = () => {
+            //let map = []
+            for(let i = 0; i < HEIGHT; i++){
+                map.push([]);
+                for(let j = 0; j < WIDTH; j++){
+                    let num = Math.random();
+                    if(num <= 0.1){
+                        a = BOMB;
+                    }else if(num <= 0.3){
+                        a = GOLD;
+                        goldC += 1;
+                    } else{
+                        a = NONE;
+                    }
+                    // tdList[i + 2][j + 2].classList.add('a');
+                    map[i].push(a)
+
+                }
+            }
+            console.log(map)
+            console.log(tdList)
+            // 10% 확률로 BOMB, 20% 확률로 GOLD, 70%확률로 NONE인 6 x 6 2차원 배열 생성 후 map에 할당
+        };
+
+
+        const makeTable = () => {
+            table.innerHTML = '';
+            
+            for(let i = 0; i < HEIGHT + 2; i++){
+                const tr = document.createElement('tr');
+                tdList.push([])
+                for(let j = 0; j < WIDTH + 2; j++){
+                    const td = document.createElement('td');
+                    td.dataset.x = `${j - 2}`;
+                    td.dataset.y = `${i - 2}`;
+                    tdList[i].push(td);
+                    if(j === 0 || i === 0){
+                        td.classList.add('gold-num');
+                    } else if(j === 1 || i === 1){
+                        td.classList.add('bomb-num');
+                    }
+                        
+                    tr.appendChild(td);
+                }
+                table.appendChild(tr);
+            }
+            for(let i = 0; i < 6; i++){
+                for(let j = 0; j < 6; j++){
+                    /*if(td.classList.contains('NONE')){
+                        map.splice([i][j], 1, NONE)
+                    }*/
+                    tdList[i + 2][j + 2].classList.add(`${map[i][j]}`);
+                }
+            }
+            // 배열보다 2씩 큰 8 x 8 테이블을 만든다
+            // 각 td 태그들을 tdList 배열에 2차원 배열로 넣는다.
+            // 각 td 태그에는 첫 줄 또는 첫 칸에는 .gold-num 을 할당
+            // 둘째 줄 또는 둘째 칸에는 .bomb-num 을 할당한다.
+        };
+
+        const showCount = () => {
+            let goldsX = 0;
+            let bombsX = 0;
+            let goldsY = 0;
+            let bombsY = 0;
+            for(let i = 0; i < 6; i++){
+                for(let j = 0; j < 6; j++){
+                    if(map[i][j] == GOLD){
+                        goldsX = goldsX + 1;
+                    } else if(map[i][j] == BOMB){
+                        bombsX = bombsX + 1;
+                    }
+                    if(map[j][i] == GOLD){
+                        goldsY = goldsY + 1;
+                    } else if(map[j][i] == BOMB){
+                        bombsY = bombsY + 1;
+                    }
+                }
+                tdList[i + 2][0].innerHTML = goldsX;
+                tdList[0][i + 2].innerHTML = goldsY;
+                tdList[i + 2][1].innerHTML = bombsX;
+                tdList[1][i + 2].innerHTML = bombsY;
+                if(tdList[i + 2][0].innerHTML == 0){
+                    tdList[i + 2][0].classList.add('hide');
+                };
+                if(tdList[0][i + 2].innerHTML == 0){
+                    tdList[0][i + 2].classList.add('hide');
+                };
+                if(tdList[i + 2][1].innerHTML == 0){
+                    tdList[i + 2][1].classList.add('hide');
+                };
+                if(tdList[1][i + 2].innerHTML == 0){
+                    tdList[1][i + 2].classList.add('hide');
+                };
+                goldsX = 0;
+                goldsY = 0;
+                bombsX = 0;
+                bombsY = 0;
+            }
+            
+            // map을 확인해서 해당 행과 열인 .bomb-num, .gold-num 에 적절한 숫자를 넣는다.
+            // .bomb-num 에는 해당 행 또는 열에 있는 폭탄의 개수를
+            // .gold-num 에는 해당 행 또는 열에 있는 골드의 개수를 넣는다.
+            // 만약 .bomb-num 또는 .gold-num 의 값이 0이 된다면 hide 클래수를 추가해준다.
+        };
+
+        const getCRT = (td) => {
+            // 세로위치, 가로위치, 안의 값, td태그 를 배열로 리턴한다.  
+
+            return [col, row, type, td];
+        };
+
+        const tdClickListener = e => {
+            if(!canvas.classList.contains('die') && e.target.nodeName === 'TD'){
+                const td = e.target;
+                td.classList.add('show');
+                if(td.classList.contains(BOMB)){
+                    td.classList.add('expl');
+                    canvas.classList.add('die')
+                    console.log('bomb')
+                    if(canvas.classList.contains('die')){
+                        for(let i = 0; i < 8; i++){
+                            for(let j = 0; j < 8; j++){
+                                tdList[i][j].classList.add('show');
+                            }
+                        }
+                    }
+                } else if(td.classList.contains(GOLD)){
+                    goldC = goldC - 1;
+                    console.log(goldC)
+                    td.classList.add('gold');
+                    td.classList.add('NONE');
+                    console.log('gold')
+                    let j = td.dataset.x;
+                    let i = td.dataset.y;
+                    map[i].splice([j], 1, NONE);
+                    showCount();
+                    if(goldC === 0){
+                        canvas.classList.add('die');
+                    }
+                    // recheck(e);
+                        
+                }
+
+                
+                // 누른 해당 td는 .show 를 넣어준다.
+                // 만약 bomb을 눌렀다면 .expl 를 넣어준다.
+                // 그리고 canvas class에 .die 를 넣어준다.
+
+                // 만약 gold를 눌렀다면 .gold 를 넣어준다.
+                // 그리고 해당 map 부분을 NONE으로 바꿔준다.
+                // 만약 남아있는 gold가 없다면 canvas class에 .die를 넣어준다.
+
+                // 이렇게 class를 추가하고 나서 showCount 함수를 호출한다.
+            }
+        }
+        table.onclick =  tdClickListener;
+
+        const init = () => {
+            tdList = [];
+            map = [];
+            canvas.classList.remove('die');
+            initMap();
+            makeTable();
+            showCount();
+        };
+        init();
+
+        button.onclick = init;
+        
+        /*const recheck = e =>{
+            for(let i = 0; i < 6; i++){
+                for(let j = 0; j < 6; j++){
+                    if(tdList[i][j].contains(NONE)){
+                        map.splice([i][j], 1 , NONE)
+                    } else {
+                        console.log('false')
+                    }
+                }
+            }
+        }*/
+    </script>
+</body>
+
+</html>

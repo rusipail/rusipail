@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+            text-align: center;
+            overflow: hidden;
+            user-select: none;
+        }
+        #container{
+            position: relative;
+            display: inline-block;
+            box-sizing: border-box;
+            max-width: 800px;
+            width: 100vw;
+            height: 100vh;
+            border: 3px solid black;
+            transition: background 0.5s;
+        }
+        #menu{
+            position: absolute;
+            transform: scale(1, 0);
+            transform-origin:top;
+            left:0;
+            top:0;
+            width: 200px;
+            padding:0 10px;
+            background-color:rgb(240 240 240);
+            transition: transform 0.3s;
+        }
+        #menu.see{
+            transform: scale(1, 1);
+        }
+        #menu > div:nth-child(n + 2){
+            border-top: 1px solid black;
+        }
+        #menu > div{
+            box-sizing: border-box;
+            width: 100%;
+            padding: 10px;
+            background-color: inherit;
+        }
+        #menu > div:hover{
+            filter: invert(1);
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>커스템 메뉴바</h1>
+        <div id="menu">
+            <div data-color="red">빨간색으로</div>
+            <div data-color="blue">파란색으로</div>
+            <div data-color="green">초록색으로</div>
+            <div data-color="transparent">하얀색으로</div>
+        </div>
+    </div>
+    <script>
+        const container = document.querySelector('#container');
+        const menu = document.querySelector('#menu');
+
+        container.oncontextmenu = e =>{
+            e.preventDefault();
+            if(e.target.id === 'container'){
+                const X = e.offsetX;
+                const Y = e.offsetY;
+                menu.classList.value = 'see';
+                menu.style.left = `${X}px`;
+                menu.style.top = `${Y}px`;
+            }
+        }
+        container.onclick = e =>{
+            if(e.target.id === 'container'){
+                menu.classList.value = '';
+            } else if(e.target.dataset.color){
+                container.style.backgroundColor = e.target.dataset.color;
+                menu.classList.value = '';
+            }
+        }
+    </script>
+</body>
+
+</html>

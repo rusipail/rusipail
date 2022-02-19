@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: black;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 100px;
+            text-align: center
+        }
+    </style>
+</head>
+
+<body>
+    <div id="year-to-date"></div>
+    <div id="hour-to-second"></div>
+    <!--<ul>
+        <li>(년도)년 (월)월 (일)일 (요일) 이 나오며 각각 4자리, 2자리, 2자리, 1자리를 유지한다.</li>
+        <li>(시) : (분) : (초).(밀리초) 가 나오며 각각 2자리, 2자리, 2자리, 3자리를 유지한다.</li>
+    </ul>!-->
+    <script>
+        const yd = document.querySelector('#year-to-date');
+        const hs = document.querySelector('#hour-to-second');
+
+        const pad = (val, num) => {
+            return String(val).padStart(num, '0');
+        };
+
+        const consvertDFormat = (y, m, d, day) => {
+            let yo = day;
+            if(yo === 0) yo = '일';
+            else if(yo === 1) yo = '월';
+            else if(yo === 2) yo = '화';
+            else if(yo === 3) yo = '수';
+            else if(yo === 4) yo = '목';
+            else if(yo === 5) yo = '금';
+            else yo = '토';
+            return `${y}년 ${pad(m, 2)}월 ${pad(d, 2)}일 (${yo})`;
+        };
+
+        const convertTFormat = (h, m, s, ms) => {
+            return `${pad(h, 2)} : ${pad(m, 2)} : ${pad(s, 2)}.${pad(ms, 3)}`;
+        }
+
+        setInterval(() => {
+            const d = new Date();
+            const year = d.getFullYear();
+            const month = d.getMonth();
+            const date = d.getDate();
+            const day = d.getDay();
+
+            const hour = d.getHours();
+            const minute = d.getMinutes();
+            const second = d.getSeconds();
+            const mil = d.getMilliseconds();
+
+            yd.innerHTML = consvertDFormat(year, month, date, day);
+            hs.innerHTML = convertTFormat(hour, minute, second, mil);
+        });
+    </script>
+</body>
+</html>

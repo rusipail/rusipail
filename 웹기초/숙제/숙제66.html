@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+    <style>
+        #header{
+            height: 50px;
+        }
+        #h1{
+            font-weight: bolder;
+            font-size: 24px;
+            transition: all 0.2s;
+        }
+        #h1:hover{
+            color: purple;
+            font-size: 40px;
+            cursor: pointer;
+        }
+        .first-letter::first-letter{
+            font-size: 24px;
+            font-weight: bolder;
+            color: crimson;
+        }
+        .desc::selection{
+            color:violet;
+            background-color: black;
+        }
+        .title{
+            font-size: 24px;
+        }
+        .title::before{
+            content:'<';
+            font-size: 20px;
+            font-weight: bolder;
+            color: gray;
+        }
+        .title::after{
+            content: '>';
+            font-size: 20px;
+            font-weight: bolder;
+            color: gray;
+        }
+    </style>
+<body>
+    <div id="header">
+        <div id="h1">'코딩 vs 프로그래밍' 차이점이 무엇일까?</div>
+    </div>
+    <div class="paragraph first">
+        <div class="desc first-letter">
+            코딩과 프로그래밍은 소프트웨어 개발 산업에서 가장 중요한 두 가지 접근법이다. 일반적으로 코딩과 프로그래밍을 동의어로 인식하는 경우가 많은데,실제로는 상당한 차이가 있다.
+        </div>
+    </div>
+    <hr>
+    <div class="paragraph second">
+        <div class="title">정의</div>
+        <div class="desc-wrapper">
+            <div class="desc first-letter">
+                코딩은 알고리즘을 선정한 프로그래밍 언어의 명령으로 변환하여 작성하는 것이다. 기본적으로 한 언어에서 다른 언어로 코드를 만드는 과정이다.프로그래밍의 초기 단계를 구현하는 데 사용되기 때문에 프로그래밍의 하위 집합이라고도 할 수 있다.
+            </div>
+            <br>
+            <div class="desc">
+                기계는 인간의 자연어를 이해하지 못하고 이진 언어인 기계코드만 이해한다. 그래서 코더(coder)는 요구 사항을 기계가 이해할 수 있는 언어로 변환하는 역할을 한다. 코더는 논리를 기계가 읽을 수 있는 코드로 변환하는 언어 지향 프로그래머이다.
+            </div>
+            <br>
+            <div class="desc">
+                프로그래밍은 컴퓨터에 부여하는 명령을 만드는 작업한다. 실행 가능한 기계 또는 응용 프로그램을 개발하는 과정이다.
+            </div>
+            <br>
+            <div class="desc">
+                프로그래밍은 단순히 코드를 작성하는 것 이상을 포함한다. 코드 작성, 분석 및 구현, 기계 레벨 출력 생성, 디버깅, 컴파일, 테스트 및 구현 등 원하는 출력을 만들기 위한 모든 중요한 영역을 포함한다. 보통 개인이 프로그래머가 되기 위해서는 코더가 되는 것보다 훨씬 더 많은 시간이 필요하다.
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="paragraph third">
+        <div class="title">목적</div>
+        <div class="desc-wrapper">
+            <div class="desc frist-letter">
+                코딩의 1차 목표는 인간과 기계의 의사소통을 용이하게 하는 것이다. 코딩은 요구 사항과 논리를 기계가 이해할 수 있는 언어로 번역하는 초기 단계이다.
+            </div>
+            <br>
+            <div class="desc">
+                반면 프로그래밍은 적절한 기계 수준 출력을 만들기 위해 실행 프로그램의 다음 측면을 다룬다. 코드를 분석하고 개발하는 것은 문론, 디버깅과 컴파일에서 소프트웨어 제품의 테스트와 구현에 이르기까지 시스템이 제대로 작동하기 위한 모든 다양한 요소를 다룬다.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

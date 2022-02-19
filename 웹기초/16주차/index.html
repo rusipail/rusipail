@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+    .container{
+        padding: 150px;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+    }
+</style>
+</head>
+<body>
+    <select class="container" onfocus="this.style.color = 'black'" onblur="this.style.color = 'transparent'" onchange="this.style.backgroundImage = `url(./img/${this.value}.png)`">
+        <option value="" selected disabled>값을 선택하시오</option>
+        <option value="html">HTML</option>
+        <option value="css">CSS</option>
+        <option value="js">Javascript</option>
+    </select>
+</body>
+</html>

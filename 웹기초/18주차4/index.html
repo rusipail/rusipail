@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            text-align: center;
+        }
+
+        .wrap {
+            width: 400px;
+            height: 300px;
+            border: 2px solid black;
+            display: inline-block;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 800px;
+            height: 50px;
+            cursor: pointer;
+            font-size: large;
+        }
+
+        .img-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        .wrap>span {
+            font-size: 1.3rem;
+        }
+
+        .wrap.glow {
+            background-color: greenyellow;
+        }
+
+        .img-container > div{
+            background-image: url(img/dice.png);
+            padding: 20%;
+            background-repeat: no-repeat;
+            background-position-x: -20%;
+            background-position-y: center;
+            background-size: auto 308%;
+        }
+
+        .img-container > .d1{
+            background-position-x: 0%;
+        }
+        .img-container > .d2{
+            background-position-x: 20%;
+        }
+        .img-container > .d3{
+            background-position-x: 40%;
+        }
+        .img-container > .d4{
+            background-position-x: 60%;
+        }
+        .img-container > .d5{
+            background-position-x: 80%;
+        }
+        .img-container > .d6{
+            background-position-x: 100%;
+        }
+
+    </style>
+</head>
+
+<body>
+    <h1>주사위를 굴려보자</h1>
+    <div class="container">
+        <div class="wrap wrap1">
+            <span>Player1</span>(<span class="total" id="p1Total"></span>)
+            <div class="img-container">
+                <div id="player11"></div>
+                <div id="player12"></div>
+            </div>
+        </div>
+        <div class="wrap wrap2">
+            <span>Player2</span>(<span class="total" id="p2Total"></span>)
+            <div class="img-container">
+                <div id="player21"></div>
+                <div id="player22"></div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <button>Roll</button>
+    </div>
+    <script>
+        const wrap1 = document.querySelector('.wrap1');
+        const wrap2 = document.querySelector('.wrap2');
+
+        const h1 = document.querySelector('h1');
+
+        const button = document.querySelector('button');
+
+        const playerRand = (num) =>{
+            const player1 = document.querySelector(`player${num}1`);
+            const player2 = document.querySelector(`player${num}2`);
+            const total = document.querySelector(`#p${num}Total`);
+            const rend1 = Math.floor(Math.random() * 6 + 1);
+            const rand2 = Math.floor(Math.random() * 6 + 1);
+            const res = rand1 + rand2;
+
+            player1.classList.value = `d${rand1}`;
+            player2.classList.value = `d${rand2}`;
+
+            total.innerHTML = res;
+
+            return res;
+        };
+    
+        button.onclick = () =>{
+            const result1 = playerRand(1);
+            const result2 = playerRand(2);
+
+            wrap1.classList.remove('glow');
+            wrap2.classList.remove('glow');
+
+            if(result1 > result2){
+                h1.innerHTML = 'player1이 이겼습니다.';
+                wrap1.classList.add('glow');
+            } else if(result1 < result2){
+                h1.innerHTML = 'player2가 이겼습니다.';
+                wrap2.classList.add('glow');
+            } else{
+                h1.innerHTML = '비겼습니다.';
+            }
+        };
+    </script>
+</body>
+
+</html>

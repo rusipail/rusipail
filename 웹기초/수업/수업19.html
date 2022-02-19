@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        table{
+            border-collapse: collapse;
+            border: 1px solid gray;
+            cursor: pointer;
+        }
+        th{
+            padding: 3px 200px;
+            transition: all 0.5s ease;
+        }    
+        th:hover{
+            background-color: black;
+            color: white;
+        }
+        th:active{
+            background-color: orange;
+            color: white;
+        }
+        .dashed{
+            border-bottom: 12px dashed red;
+        }
+        .strong{
+            font-size: 23px;
+            font-weight: bold;
+            background-color: gray;
+            color: white;
+            border: 1px solid gray;
+        }
+        .big{
+            font-size: 23px;
+            font-weight: bold;
+            background-color: white;
+            color: black;
+            border: 1px dashed white;
+        }
+        .blue::first-letter{
+            color: lightgray;
+        }
+        .blue{
+            font-size: 35px;
+            background-color: cadetblue;
+        }
+        .gray{
+            background-color: gray;
+            color: white;
+            border: 1px solid gray;
+            font-size: 20px;
+            font-weight: 100px;
+        }
+        .gray:active, .strong:active{
+            background-color: orange;
+            border: 1px solid orange;
+        }
+        .white{
+            background-color: white;
+            border: 1px dashed white;
+        }
+        
+    </style>
+</head>
+<body>
+    <h1>Pricing Plan</h1>
+    <table border>
+        <tr>
+            <th colspan="2" class="blue">House Cleaning</th>
+        </tr>
+        <tr>
+           <td>
+               <div></div>
+           </td>
+            <td rowspan="4" class="gray"><span class="strong">$28/</span>Hour</td> 
+        </tr>
+        <tr>
+            <td class="gray">Wipe Cabinets</td>
+        </tr>
+        <tr>
+            <td class="gray">Wipe Tops</td>
+        </tr>
+        <tr>
+            <td class="gray">Dust Tops Of Cabinets</td>
+        </tr>
+        <tr class="dashed">
+           <td class="big">Bathroom</td>
+            <td rowspan="4" class="white"><span class="big">$29/</span>Hour</td> 
+        </tr>
+        <tr>
+            <td class="white">Dust Counters</td>
+        </tr>
+        <tr>
+            <td class="white">Dust Light</td>
+        </tr>
+        <tr class="dashed">
+            <td class="white">Wipe Count</td>
+        </tr>
+        <tr>
+           <td class="strong">Living Room</td>
+            <td rowspan="4" class="gray"><span class="strong">$29/</span>Hour</td> 
+        </tr>
+        <tr>
+            <td class="gray">Make Beds</td>
+        </tr>
+        <tr>
+            <td class="gray">Dust Furniture</td>
+        </tr>
+        <tr>
+            <td class="gray">Dust Mini-Blids</td>
+        </tr>
+    </table>
+</body>
+</html>

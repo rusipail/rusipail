@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin:0;
+            height: 100vh;
+        }
+        .container{
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            z-index: 1;
+        }
+        #modal{
+            position:fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(40, 40, 40, 0.3);
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            filter: opacity(0);
+            transition: all 0.3s;
+        }
+
+        #modal > div{ 
+            position: relative;
+            width: 60%;
+            background-color: white;
+            border-radius: 6px;
+            box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2);
+            padding: 40px;
+        }
+
+        #modal.show{
+            z-index: 2;
+            filter: opacity(100%);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button id="modal-but">색 입력창 열기</button>
+    </div>
+    <div id="modal">
+        <div>
+            <h2>값 입력하기</h2>
+            <input type="color"><br>
+        </div>
+    </div>
+    <!--<ul>
+        <li>'색 입력창 열기' 버튼을 클릭하면 모달창이 열린다.</li>
+        <li>색 입력창 열기 의 경우 input 태그가 color로 나온다.</li>
+        <li>input이 바뀔 때마다 배경색이 바뀐다.</li>
+        <li>모달창이 열린 상태에서 바깥을 클릭하면 모달창이 없어진다.</li>
+    </ul>!-->
+    <script>
+        const container = document.querySelector('.container');
+        const modal = document.querySelector('#modal');
+        const input = document.querySelector('#modal > div > input');
+        container.onclick = (evt) =>{
+            if(evt.targetid === 'modal-but'){
+                modal.classList.add('show');
+            }
+        };
+
+        window.onclick = (evt) =>{
+            if(evt.target.id === 'modal'){
+                modal.classList.remove('show');
+            }
+        };
+        input.oninput = () =>{
+            container.style.backgroundColor = input.value;
+        }
+    </script>
+</body>
+
+</html>

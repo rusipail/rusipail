@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .text-container {
+            font-size: xx-large;
+            width: 500px;
+            height: 500px;
+            margin: 0 auto;
+            border: 3px solid black;
+            padding: 10px;
+            overflow: auto;
+            word-break: break-all;
+            user-select: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>한글이던 아니던 상관없이 무조건 영어 대문자가 나온다!!</h1>
+    <div class="text-container"></div>
+    <!--<ul>
+        <li>키보드를 입력받으면 한글로 되어있던 영어로 되어있던 capslock이 되어있던 상관없이 무조건 영어 대문자가 나온다.</li>
+        <li>Backspace를 누르면 한글자씩 지워진다.</li>
+        <li>나머지 키를 누를 경우 아무 반응도 하지 않는다.</li>
+    </ul>!-->
+    <script>
+        const text = document.querySelector('.text-container');
+
+        window.onkeydown = (evt) =>{
+            if(evt.code.includes('Key') && evt.code.length === 4){
+                text.innerHTML += evt.code.charAt(3);
+            } else if(evt.code === 'Backspace'){
+                text.innerHTML = text.innerHTML.slice(0, -1);
+            }
+        };
+    </script>
+</body>
+
+</html>

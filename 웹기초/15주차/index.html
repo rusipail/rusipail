@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>숫자를 쓴 만큼 오른쪽으로 움직입니다.</h1>
+    <input type="number" oninput="this.style.transform = `translateX(${parseInt(this.value)}px)`"               
+        onblur = "this.type = 'password'" onfocus="this.type = 'number';">
+    <script>
+        input.oninput = () =>{
+            input.style.transform = `translateX(${parseInt(inpu.value)}px)`;
+        };
+        input.onblur = () =>{
+            input.type = 'password';
+        };
+        input.onfocus = () =>{
+            input.type = 'number';
+        };
+    </script>
+</body>
+</html>

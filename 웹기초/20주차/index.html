@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            user-select: none;
+            font-size: 5em;
+        }
+        #result{
+            display: flex;
+            width: 512px;
+            height: 512px;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="result">
+        0, 0
+    </div>
+    <!--<ul>
+        <li>result에 mousemove의 좌표에 따라서 색이 바뀐다.</li>
+        <li>result의 너비와 높이는 512px이다.</li>
+        <li>X 좌표, Y 좌표는 그 값에 0.5 곱한 값이 rgb에 쓰이는 값이 된다.</li>
+        <li>rgb에 쓰이는 값은 mousemove 때마다 update된다.</li>
+        <li>글자색은 X좌표가 0일 땐 rgb(255, 255, 0) 510일 땐 rgb(0, 0, 255)이 된다.</li>
+        <li>배경색은 Y좌표가 0일 땐 rgb(0, 255, 255) 510일 땐 rgb(255, 0, 0)이 된다.</li>
+        <li>rgb에 쓰이는 값은 0이상 255이하의 범위를 벗어날 수 없다.</li>
+    </ul>!-->
+    <script>
+        const result = document.querySelector("#result");
+
+        result.onmousemove = () =>{
+            let X = Math.floor(evt.offsetX / 2);
+            let Y = Math.floor(evt.offsetY / 2);
+            if(X >= 255) X = 255;
+            if(Y >= 255) Y = 255;
+
+            result.innerHTML = `${X}, ${Y}`
+
+            result.style.color = `rgb(${255 - X}, ${255 - X}, ${X})`;
+            result.style.backgroundColor = `rgb(${Y}, ${255 - Y}, ${255 - Y})`;
+        };
+
+    </script>
+</body>
+
+</html>

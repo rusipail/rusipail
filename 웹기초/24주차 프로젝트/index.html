@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>캘린더</title>
+    <style>
+        #container {
+            margin: 0;
+            align-items: center;
+            cursor: pointer;
+            z-index: 0;
+        }
+
+        #l1,
+        #l2,
+        #l3,
+        #l4,
+        #l5 {
+            display: flex;
+            justify-content: center;
+        }
+
+        .sun,
+        .mon,
+        .tue,
+        .wed,
+        .thu,
+        .fri,
+        .sat {
+            width: 98px;
+            height: 65px;
+            border: 1px solid black;
+        }
+
+        #h1 {
+            font-size: 32px;
+            font-weight: bolder;
+            text-align: center;
+            padding: 20px 0px;
+        }
+
+        .none {
+            border: 0px solid black;
+        }
+
+        #eve {
+            border: 1px solid black;
+            width: 350px;
+            height: 350px;
+            border-radius: 20px;
+            position: relative;
+            top: -320px;
+            left: 500px;
+            background-color: white;
+            box-shadow: 0px 0px 10px 10px gray;
+        }
+
+        #title1 {
+            font-size: 32px;
+            text-align: center;
+            padding-top: 30px;
+        }
+
+        .text {
+            height: 40px;
+            font-size: large;
+            width: 90%;
+            margin-left: 20px;
+        }
+
+        .aline {
+            padding: 10px 0px;
+            width: 90%;
+            margin-left: 20px;
+        }
+
+        .short {
+            width: 20px;
+        }
+
+        .long {
+            padding-right: 220px;
+        }
+
+        .blank {
+            padding-right: 170px;
+        }
+
+        #button {
+            margin-left: 20px;
+            width: 90%;
+            display: flex;
+        }
+
+        #red,
+        #blue {
+            color: white;
+            width: 50%;
+            padding: 10px 0px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 20px
+        }
+
+        #red {
+            background-color: red;
+        }
+
+        #blue {
+            background-color: blue;
+        }
+
+        #result+.show {
+            opacity: 100%;
+            z-index: 1;
+        }
+
+        #result+.close {
+            opacity: 0%;
+            z-index: -1;
+        }
+        #result{
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div id="h1">내 캘린더</div>
+        <div id="l1">
+            <div class="sun">
+                <div></div>
+            </div>
+            <div class="mon">
+                <div></div>
+            </div>
+            <div class="tue">
+                <div></div>
+            </div>
+            <div class="wed day">
+                <div id="1">1</div>
+            </div>
+            <div class="thu day">
+                <div id="2">2</div>
+            </div>
+            <div class="fri day">
+                <div id="3">3</div>
+            </div>
+            <div class="sat day">
+                <div id="4">4</div>
+            </div>
+        </div>
+        <div id="l2">
+            <div class="sun day">
+                <div id="5">5</div>
+            </div>
+            <div class="mon day">
+                <div id="6">6</div>
+            </div>
+            <div class="tue day">
+                <div id="7">7</div>
+            </div>
+            <div class="wed day">
+                <div id="8">8</div>
+            </div>
+            <div class="thu day">
+                <div id="9">9</div>
+            </div>
+            <div class="fri day">
+                <div id="10">10</div>
+            </div>
+            <div class="sat day">
+                <div id="11">11</div>
+            </div>
+        </div>
+        <div id="l3">
+            <div class="sun day">
+                <div id="12">12</div>
+            </div>
+            <div class="mon day">
+                <div id="13">13</div>
+            </div>
+            <div class="tue day">
+                <div id="14">14</div>
+            </div>
+            <div class="wed day">
+                <div id="15">15</div>
+            </div>
+            <div class="thu day">
+                <div id="16">16</div>
+            </div>
+            <div class="fri day">
+                <div id="17">17</div>
+            </div>
+            <div class="sat day">
+                <div id="18">18</div>
+            </div>
+        </div>
+        <div id="l4">
+            <div class="sun day">
+                <div id="19">19</div>
+            </div>
+            <div class="mon day">
+                <div id="20">20</div>
+            </div>
+            <div class="tue day">
+                <div id="21">21</div>
+            </div>
+            <div class="wed day">
+                <div id="22">22</div>
+            </div>
+            <div class="thu day">
+                <div id="23">23</div>
+            </div>
+            <div class="fri day">
+                <div id="24">24</div>
+            </div>
+            <div class="sat day">
+                <div id="25">25</div>
+            </div>
+        </div>
+        <div id="l5">
+            <div class="sun day">
+                <div id="26">26</div>
+            </div>
+            <div class="mon day">
+                <div id="27">27</div>
+            </div>
+            <div class="tue day">
+                <div id="28">28</div>
+            </div>
+            <div class="wed day">
+                <div id="29">29</div>
+            </div>
+            <div class="thu day">
+                <div id="30">30</div>
+            </div>
+            <div class="fri day">
+                <div id="31">31</div>
+            </div>
+            <div class="sat none">
+                <div></div>
+            </div>
+        </div>
+    </div>
+    <div id="result"></div>
+    <div id="eve" class="close">
+        <div id="title1">새로운 이벤트</div>
+        <input type="text" placeholder="제목" class="none text" id="title2" minlength="0" maxlength="99999"><br>
+        <input type="text" placeholder="위치" class="none text" id="where"><br>
+        <div class="aline"><span class="long">하루종일</span><input type="range" min="0" max="1" step="1" class="short">
+        </div>
+        <div class="aline"><span class="blank">시작</span><input type="time"></div>
+        <div class="aline"><span class="blank">종료</span><input type="time"></div>
+        <div id="button">
+            <button id="blue">일정추가</button>
+            <button id="red">취소</button>
+        </div>
+    </div>
+    <script>
+        const l1 = document.querySelector("#l1");
+        const l2 = document.querySelector("#l2");
+        const l3 = document.querySelector("#l3");
+        const l4 = document.querySelector("#l4");
+
+        const sun = document.querySelector('.sun');
+        const mon = document.querySelector('.mon');
+        const tue = document.querySelector('.tue');
+        const wed = document.querySelector('.wed');
+        const thu = document.querySelector('.thu');
+        const fri = document.querySelector('.fri');
+        const sat = document.querySelector('.sat');
+        const day = document.querySelector('.day');
+
+        const result = document.querySelector("#result");
+        const eve = document.querySelector("#eve");
+        const container = document.querySelector("#container");
+
+        const button = document.querySelector("#button");
+        const blue = document.querySelector('#blue');
+        const red = document.querySelector('#red');
+
+        const title1 = document.querySelector("#title1");
+        const title2 = document.querySelector("#title2");
+        const where = document.querySelector("#where");
+
+        let total = 0;
+
+        const rand = () => {
+            return Math.floor(Math.random() * 256);
+        };
+
+        red.onclick = () => {
+            eve.classList.remove("show");
+            eve.classList.add("close");
+        };
+
+        eve.onmouseover = (event) => {
+            eve.style.boxShadow = '0px 0px 40px 10px gray';
+        };
+        eve.onmouseout = (event) => {
+            eve.style.boxShadow = '0px 0px 10px 10px gray';
+        };
+
+        container.onclick = e => {
+            // classList, event.target 복습
+            const tar = e.target;
+            eve.classList.add("show");
+            eve.classList.remove("close");
+            if (tar.classList.contains('day')) {
+                console.log(tar)
+                blue.onclick = () => {
+                    if (title2.value == '') {
+                        eve.classList.remove("show");
+                        eve.classList.add("close");
+                        alert('일정 제목을 입력해주세요');
+                    } else {
+                        eve.classList.remove("show");
+                        eve.classList.add("close");
+                        const div = document.createElement("div");
+                        tar.appendChild(div);
+                        div.innerHTML = `${title2.value} / ${where.value}`;
+                        div.style.backgroundColor = `rgb(${rand()}, ${rand()}, ${rand()})`;
+                        div.style.fontSize = `7px`;
+                        div.style.margin = `3px`;
+                        title2.value = '';
+                        where.value = '';
+
+                        total += 1;
+
+                        result.innerHTML = `이번 달 일정 수:${total}개`;
+                    }
+                };
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin:0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            user-select: none;
+        }
+        .ball{
+            position:absolute;
+            left:0;
+            top:0;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <h1>마우스를 드래그하면 원이 생성</h1>
+    <!--<ul>
+        <li>드래그 할 때 원이 생긴다.</li>
+        <li>원이 생기는 과정은 한쪽 끝에서 다른쪽 끝으로 만들어진다.</li>
+        <li>보기에 어색하게 원이 만들어지면 (예 원이 마우스를 따라가지 않음) 실패다.</li>
+    </ul>!-->
+    <script>
+        const body = document.body;
+        const rand = () =>{
+            return Math.floor(Math.random() * 256);
+        };
+        let X = 0;
+        let Y = 0;
+        let div = null;
+
+        window.onmousedown = (evt) =>{
+            X = evt.pageX;
+            Y = evt.pageY;
+            div = document.querySelector('div');
+            div.style.backgroundColor = `rgb(${rand()}, ${rand()}, ${rand()})`;
+            body.appendChild(div);
+        };
+
+        window.onmousemove = (evt) =>{
+            if(div){
+                const dx = Math.abs(evt.pageX - X);
+                const dy = Math.abs(evt.pageY - Y);
+                let XP = '100';
+                let YP = '100';
+
+                if(evt.pageX < X){
+                    XP = '0';
+                }
+                if(evt.pageY < Y){
+                    YP = '0';
+                }
+
+                div.style.width = `${dx}px`;
+                div.style.height = `${dy}px`;
+                div.style.transform = `translate(calc(${evt.pageX}px - ${XP}%), calc(${evt.pageY}px = ${YP}%))`;
+            }
+        };
+
+        window.onmouseup = (evt) =>{
+            div = null;
+        }
+    </script>
+</body>
+</html>

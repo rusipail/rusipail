@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        
+        td {
+            width: 40px;
+            height: 40px;
+            border: 1px solid black;
+            cursor: pointer;
+        }
+
+        td.hover {
+            background-color: gray;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>크로스헤어</h1>
+    <div style="color: gray">**태그의 속성들은 class hover를 제외하면 사용할 수 없습니다.**</div>
+    <div style="color: gray">**document.querySelectorAll을 사용할 수 없습니다.**</div>
+    <div>
+        <table id="table">
+            <tbody></tbody>
+        </table>
+    </div>
+    <script>
+        /*
+            td에 mouseover 이벤트가 발생하면 해당 칸의 가로와 세로 모두 색이 적용되는(hover 클래스 활용) 크로스헤어 만들기
+            table의 크기는 10x10으로 한다.
+
+            주의) dataset 속성 class(hover 제외)같은 태그의 속성들을 활용하지 않고 td들의 배열과 배열 고차함수를 활용해서 문제를 풀도록 한다.
+        */
+        const WIDTH = 10, HEIGHT = 10;
+
+        const tbody = document.querySelector('#table > tbody');
+        let tdList = []
+
+        const makeTable = () => {
+            for(let i = 0; i < HEIGHT; i++){
+                const tr = document.createElement('tr');
+                tdList.push([]);
+                for(let j = 0; j < WIDTH; j++){
+                    const td = document.createElement('td');
+                    tr.appendChild(td);
+
+                    tdList[i].push(td);
+                }
+                tbody.appendChild(tr);
+            }
+            //  10x10 테이블을 만들어 주는 함수
+
+        };
+
+        const reset = (e) => {
+            tdList.forEach(v => v.forEach(t => t.classList.remove('hover')));
+            // 기존에 있던 hover 클래스를 모두 없앤다. (for문 없이 forEach만 사용하기)
+        }
+
+        const showCrossHair = (e) => {
+            const td = e.target;
+            
+            if(td.nodeName === 'TD'){
+                const y = tdList.findIndex(v => v.some(t => t === td))
+                const x = tdList[y].findIndex(v => v === td);
+
+                tdList.forEach((v, i) => v.forEach((t, j) => {
+                    if(i === y || j === x) t.classList.add('hover');
+                }))
+                // td 태그의 index (x, y)를 tdList에서 찾고 (findIndex와 some 사용하기)
+
+                // index가 x 또는 y 값이 같은 경우 hover를 class에 추가한다. (forEach만 사용하기)
+            }
+        };
+
+        tbody.onmouseover = showCrossHair;
+
+        tbody.onmouseout = reset;
+        
+        makeTable()
+    </script>
+</body>
+
+</html>

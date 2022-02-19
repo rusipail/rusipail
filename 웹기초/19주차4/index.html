@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+            user-select: none;
+            text-align: center;
+        }
+        h1{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            background-color: black;
+            filter: opacity(0%);
+            padding: 10px;
+            color: white;
+            transition: all 0.3s;
+            overflow: hidden;
+        }
+        h1:hover{
+            filter: opacity(70%);
+        }
+        div.card{
+            position: relative;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url(img/card.svg);
+            width:calc(100vmin * 2 / 3);
+            height: 100vmin;
+            background-position: calc(19% / 51) calc(150% / 231);
+            background-size: auto 400%;
+            background-repeat: no-repeat;
+            transition: all 0.3s;
+        }
+        div.card[data-x="1"]{
+            background-position-x:calc((100% - 357% / 510) / 12 * 1 + 19% / 51);
+        }
+        div.card[data-x="2"]{
+            background-position-x:calc((100% - 357% / 510) / 12 * 2 + 19% / 51);
+        }
+        div.card[data-x="3"]{
+            background-position-x:calc((100% - 357% / 510) / 12 * 3 + 19% / 51);
+        }
+        div.card[data-x="4"]{
+            background-position-x:calc((100% - 357% / 510) / 12 * 4 + 19% / 51);
+        }
+        div.card[data-x="5"]{
+            background-position-x:calc((100% - 357% / 510) / 12 * 5 + 19% / 51);
+        }
+        div.card[data-x="6"]{
+            background-position-x:calc((100% - 357% / 510) / 12 * 6 + 19% / 51);
+        }
+        div.card[data-x="7"]{
+            background-position-x:calc((100% - 357% / 510) / 12 * 7 + 19% / 51);
+        }
+        div.card[data-x="8"]{
+            background-position-x:calc((100% - 357% / 510) / 12 * 8 + 19% / 51);
+        }
+        div.card[data-x="9"]{
+            background-position-x:calc((100% - 357% / 510) / 12 * 9 + 19% / 51);
+        }
+        div.card[data-x="10"]{
+            background-position-x:calc((100% - 357% / 510) / 12 * 10 + 19% / 51);
+        }
+        div.card[data-x="11"]{
+            background-position-x:calc((100% - 357% / 510) / 12 * 11 + 19% / 51);
+        }
+        div.card[data-x="12"]{
+            background-position-x:calc((100% - 357% / 510) / 12 * 12 + 19% / 51);
+        }
+        div.card[data-y="1"]{
+            background-position-y:calc((100% - 300% / 231) / 3 * 1 + 150% / 231);
+        }
+        div.card[data-y="2"]{
+            background-position-y:calc((100% - 300% / 231) / 3 * 2 + 150% / 231);
+        }
+        div.card[data-y="3"]{
+            background-position-y:calc((100% - 300% / 231) / 3 * 3 + 150% / 231);
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1 id="result"><span id="shape">하트</span> : <span id="num">A</span></h1>
+    </div>
+    <script>
+        const card = document.querySelector('.card');
+        const shape = document.querySelector('#result > #shape');
+        const num = document.querySelector('#result > #num');
+        let X = 0;
+        let Y = 0;
+
+        const fun = e =>{
+            card.dataset.x = X;
+            card.dataset.y = Y;
+            if(Y === 0){
+                shape.innerHTML = '하트';
+            } else if(Y === 1){
+                shape.innerHTML = '다이아몬드';
+            } else if(Y === 2){
+                shape.innerHTML = '클로버';   
+            } else if(Y === 3){
+                shape.innerHTML = '스페이드';   
+            }
+
+            if(X === 0){
+                num.innerHTML = 'A';
+            } else if(X === 10){
+                num.innerHTML = 'J';
+            } else if(X === 11){
+                num.innerHTML = 'Q';
+            } else if(X === 12){
+                num.innerHTML = 'K';
+            } else{
+                num.innerHTML = X + 1;
+            }
+        };
+
+        window.oncontextmenu = e =>{
+            e.preventDefault();
+        };
+
+        window.onmousedown = e =>{
+            e.preventDefault();
+            if(e.button === 0){
+                X = (X + 1) % 13;
+            } else if(e.button === 2){
+                Y = (Y + 1) % 4;
+            } else if(e.button === 1){
+                X = Math.floor(Math.random() * 13) % 13;
+                Y = Math.floor(Math.random() * 4) % 4;
+            }
+            fun();
+        }
+    </script>
+</body>
+</html>

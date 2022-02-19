@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스네이크 게임</title>
+    <style>
+        body {
+            margin: 0;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .map {
+            position: relative;
+            width: 600px;
+            height: 600px;
+            border: 1px solid black;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        #sub-container {
+            height: 600px;
+            padding: 0 10px;
+        }
+
+        .map .box {
+            position: relative;
+            display: flex;
+            justify-content: flex-start;
+            border: 1px solid #dedede;
+            box-sizing: border-box;
+            flex-shrink: 0;
+            width: 40px; height: 40px;
+        }
+        .map .box.ArrowLeft, .map .box.head.ArrowRight {
+            flex-direction: row;
+        }
+        .map .box.ArrowRight, .map .box.head.ArrowLeft {
+            flex-direction: row-reverse;
+        }
+        .map .box.ArrowUp, .map .box.head.ArrowDown {
+            flex-direction: column;
+        }
+        .map .box.ArrowDown, .map .box.head.ArrowUp {
+            flex-direction: column-reverse;
+        }
+        .map .box .inner-box {
+            background-color: green;
+        }
+        
+        .map .box.apple::after {
+            content: "";
+            position: absolute;
+            left: 0; right: 0; top: 0; bottom: 0;
+            background: url('./img/apple.png');
+            background-size: contain;
+        }
+    </style>
+</head>
+
+<body>
+    <!--<div id="easy-container">
+        Easy 버전 (제출 X)
+        <div class="map"></div>
+    </div>!-->
+    <div id="container">
+        Normal 버전 (이거로 만들어서 제출하세요)
+        <div class="map"></div>
+    </div>
+    <div id="sub-container">
+        <div>점수 : <span id="score"></span></div>
+    </div>
+    <script>
+        /*
+            CSS : flex-basis, flex-direction, justify-content
+            JS : array.includes, while-break
+        */
+        const SPEED = 10;
+        const W = 40, H = 40;
+        const boxes = []
+        const innerBoxes = []
+
+        let currentDirection = 'ArrowRight'
+        let nextDirection = 'ArrowRight'
+        // <- 머리방향
+        let bodyPos = [[3, 1], [2, 1], [1, 1]]
+        
+        let headPos = null
+        let tailPos = null
+        let applePos = null
+        
+        const map = document.querySelector('#container .map')
+        const score = document.querySelector('#score')
+        
+        const eatApple = () => {
+            boxes[applePos[1]][applePos[0]].classList.remove('apple')
+            makeApple()
+        }
+
+        const makeApple = () => {
+            let x, y
+            while(true){
+                x = Math.floor(Math.random() * boxes.length)
+                y = Math.floor(Math.random() * boxes.length)
+                if(isThereSnakeBodyAt(x, y) === false) break//이게 뭘 하는지 모르겠음
+            }
+            applePos = [x, y]
+            boxes[y][x].classList.add('apple')
+        }
+
+        const dead = () => {
+            alert(`꽥 죽음 점수: ${bodyPos.length}`)
+        }
+
+        const isThereSnakeBodyAt = (x, y) => {
+            return bodyPos.some((pos) => pos[0] === x && pos[1] === y)
+        }
+
+        const isOutOfMap = (x, y) => {
+            return x < 0 || x >= boxes.length || y < 0 || y >= boxes.length
+        }
+
+        const getNextPosition = () => {
+            const currentPos = bodyPos[0].concat()
+            if(currentDirection == 'ArrowRight') currentPos[0] ++
+            if(currentDirection == 'ArrowLeft') currentPos[0] --
+            if(currentDirection == 'ArrowUp') currentPos[1] --
+            if(currentDirection == 'ArrowDown') currentPos[1] ++
+            return currentPos
+        }
+
+        const eatAppleIfPossible = (x, y) => {
+            if(x == applePos[0] && y == applePos[1]){
+                eatApple()
+                tailPos = null
+            } else{
+                tailPos = bodyPos.pop()
+            }
+        }
+
+        const setDirectionToBox = (x, y) => {
+            boxes[y][x].classList.remove('ArrowRight', 'ArrowLeft', 'ArrowDown', 'ArrowUp')
+            boxes[y][x].classList.add(currentDirection)
+        }
+
+        let frame = 0
+        const step = () => {
+            if(frame % SPEED == 0){
+                currentDirection = nextDirection
+                const nextPos = getNextPosition()
+                const newX = nextPos[0], newY = nextPos[1]
+
+                if(isOutOfMap(newX, newY) || isThereSnakeBodyAt(newX, newY)){
+                    dead()
+                    return
+                }
+
+                eatAppleIfPossible(newX, newY)
+
+                bodyPos.unshift([newX, newY])
+                headPos = [newX, newY]
+
+                setDirectionToBox(bodyPos[1][0], bodyPos[1][1])
+                boxes[bodyPos[1][1]][bodyPos[1][0]].classList.remove('head')
+                
+                setDirectionToBox(newX, newY)
+                boxes[newY][newX].classList.add('head')
+            } else{
+                if(headPos != null){
+                    innerBoxes[headPos[1]][headPos[0]].style.flexBasis = ((frame % SPEED) + 1) / SPEED * 100 + '%'
+                }
+                if(tailPos != null){
+                    innerBoxes[tailPos[1]][tailPos[0]].style.flexBasis = (SPEED - frame % SPEED - 1) / SPEED * 100 + '%'
+                }
+            }
+            frame++
+
+            score.innerHTML = bodyPos.length
+
+            // Easy 버전용 draw. 학생들은 만들 필요 없는 부분
+            /*const easyMap = document.querySelector('#easy-container .map')
+            easyMap.innerHTML = ''
+            for(let i=0; i < 600/H; i++){
+                for(let j=0; j < 600/W; j++){
+                    const box = document.createElement('div')
+                    box.classList.add('box')
+                    if(i === applePos[1] && j === applePos[0])
+                        box.classList.add('apple')
+                    easyMap.append(box)
+
+                    const innerBox = document.createElement('div')
+                    innerBox.classList.add('inner-box')
+                    if(isThereSnakeBodyAt(j, i))
+                        innerBox.style.flexBasis = '100%'
+                    box.append(innerBox)
+                }
+            }*/
+
+            requestAnimationFrame(step)
+        }
+        
+        const init = () => {
+            for(let i=0; i < 600/H; i++){
+                boxes[i] = []
+                innerBoxes[i] = []
+                for(let j=0; j < 600/W; j++){
+                    const box = document.createElement('div')
+                    box.classList.add('box')
+                    box.style.width = W + 'px'
+                    box.style.height = H + 'px'
+                    map.append(box)
+
+                    const innerBox = document.createElement('div')
+                    innerBox.classList.add('inner-box')
+                    box.append(innerBox)
+
+                    boxes[i][j] = box
+                    innerBoxes[i][j] = innerBox
+                }
+            }   
+
+            for(let i = 0; i<bodyPos.length; i++){
+                innerBoxes[bodyPos[i][1]][bodyPos[i][0]].style.flexBasis = '100%'
+                boxes[bodyPos[i][1]][bodyPos[i][0]].classList.add(currentDirection)
+            }
+
+            window.onkeydown = (evt) => {
+                if(['ArrowRight', 'ArrowLeft', 'ArrowUp', 'ArrowDown'].includes(evt.key)){
+                    nextDirection = evt.key
+                    if(
+                        (currentDirection == 'ArrowRight' && nextDirection == 'ArrowLeft') ||
+                        (currentDirection == 'ArrowLeft' && nextDirection == 'ArrowRight') ||
+                        (currentDirection == 'ArrowUp' && nextDirection == 'ArrowDown') ||
+                        (currentDirection == 'ArrowDown' && nextDirection == 'ArrowUp')
+                    ){
+                        nextDirection = currentDirection
+                    }
+                }
+            }
+
+            makeApple()
+            requestAnimationFrame(step)
+        }
+        init()
+
+    </script>
+</body>
+
+</html>

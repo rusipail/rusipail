@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #img-wrapper {
+            width: 208px;
+            height: 300px;
+            background-image: url("./img/엘리베이터.png");
+        }
+
+        .btn-wrapper {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div data-status="0" id="img-wrapper"></div>
+        <div class="btn-wrapper">
+            <button data-status="open">열기</button>
+            <button data-status="close">닫기</button>
+        </div>
+    </div>
+    <!--<ul>
+        <li>background-image로 엘리베이터 그림을 설정</li>
+        <li>열기 버튼을 누르면 엘리베이터가 열리는 것처럼 position이 바뀜</li>
+        <li>닫기 버튼을 누르면 엘리베이터가 닫히는 것처럼 position이 바뀜</li>
+        <li>다른 경우는 동작하지 않도록 함.</li>
+    </ul>!-->
+    <script>
+        const img = document.querySelector('#img-wrapper');
+        const btnWrapper = document.querySelector('.btn-wrapper');
+        
+        btnWrapper.onclick = (evt) => {
+            const tar = evt.target;
+            let way = 0;
+            if(tar.dataset.status === 'open' && img.dataset.status === '0'){
+                way = 1;
+            } else if(tar.dataset.status === 'close' && img.dataset.status === '7'){
+                way = -1;
+            } else{
+                return false;
+            }
+
+            let set = setInterval(() =>{
+                img.dataset.status = Number(img.dataset.status) + way;
+                img.style.backgroundPositionX = `calc(100% / 7 * ${img.dataset.status})`;
+                if(img.dataset.status === '0' || img.dataset.status === '7'){
+                    clearInterval(set);
+                }
+            }, 50);
+        };
+    </script>
+</body>
+
+</html>

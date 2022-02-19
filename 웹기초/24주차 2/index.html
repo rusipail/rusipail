@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+            height: 100vh;
+        }
+        .ball{
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            border-radius: 50%;
+            left:0;
+            top:0;
+        }
+    </style>
+</head>
+<body>
+    <!--<ul>
+        <li>1초 동안 원이 커지면서 생겨나고, 다시 1초동안 다시 작아진다.</li>
+        <li>작아진 이후로는 삭제된다.</li>
+        <li>모든 setInterval의 interval은 5로 설정하고, 원이 생기는 간격 또한 같다.</li>
+    </ul>!-->
+    <script>
+        const body = document.body;
+        const pos = (num) => {
+                return Math.floor(25 + Math.random() * (num - 50));
+            };
+        setInterval(() => {
+            // 원이 처음 생김 처음 scale(0, 0) -> 원이 커짐 -> scale(1, 1)이면 다시 줄어듬 -> scale(0, 0)이면 원을 없앰
+            const span = document.createElement("span");
+            span.classList.add("ball");
+            const trans = `translate(calc(${pos(innerWidth)}px - 50%), calc(${pos(innerHeight)}px - 50%))`;
+            span.style.transform = `${trans} scale(0, 0)`;
+            span.style.bakcgroundColor = `rgb(${rand()}, ${rand()}, ${rand()})`;
+            let i = 0;
+            const speed = 200;
+            let = setInterval(() =>{
+                i += 1;
+                span.style.transform = `${trans} scale(${i / speed}, ${i / speed})`;
+                if(i === speed){
+                    clearInterval(set)
+                    set = setInterval(() =>{
+                        i -= 1;
+                        span.style.transform = `${trans} scale(${i / speed}, ${i / speed})`
+                        if(i === 0){
+                            clearInterval(set)
+                            span.remove;
+                        }  
+                    })
+                }
+            })
+        }, 5);
+    </script>
+</body>
+</html>

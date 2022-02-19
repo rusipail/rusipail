@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+            background-image: url(img/8k.jpg);
+            height: 100vh;
+            background-repeat: no-repeat;
+            transition: background-size 0.5s;
+            background-size: 100% 100%;
+        }
+    </style>
+</head>
+<body>
+    <!--<ul>
+        <li>background-image를 body태그 전체에 100% 100%로 설정한다.</li>
+        <li>transition: background-size 0.5s로 설정한다.</li>
+        <li>왼쪽 클릭을 하면 1.5배씩 zoom-in이 된다.</li>
+        <li>오른쪽 클릭을 하면 1.5배씩 zoom-out이 된다.</li>
+        <li>zoom의 제한은 100% ~ 225% 이다.</li>
+        <li>mouse를 움직이면 마우스의 위치에 따라서 background-position이 바뀐다.</li>
+    </ul>!-->
+    <script>
+        const body = document.body;
+        let per = 100;
+        let x = 0;
+        let y = 0;
+
+        window.onclick = () =>{
+            if(per < 255){
+                per *= 1.5;
+                body.style.backgroundSize = `${per}% ${per}%`;
+            }
+        };
+
+        window.oncontextmenu = (evt) =>{
+            evt.preventDefault();
+            if(per > 100){
+                per /= 1.5;
+                body.style.backgroundSize = `${per}% ${per}%`;
+            }
+        };
+
+        window.onmousemove = (evt) =>{
+            const dx = evt.pageX / innerWidth;
+            const dy = evt.pageY / innerHeight;
+            body.style.backgroundPosition = `${dx * 100}% ${dy * 100}%`;
+        }
+    </script>
+</body>
+</html>

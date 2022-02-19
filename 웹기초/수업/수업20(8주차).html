@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        div{
+            color: black;
+            background-color: yellow;
+        }
+        .a.b.c{
+            background-color: black;
+        }
+        .a.b, .a.c, .b.c{
+            color: white;
+            background-color: red;
+        }
+        .a, .b, .c{
+            color: yellow;
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+    <div>아무것도 없음</div>
+    <div class="a">a만 있음</div>
+    <div class="b">b만 있음</div>
+    <div class="c">c만 있음</div>
+    <div class="a b">a b 있음</div>
+    <div class="a c">a c 있음</div>
+    <div class="b c">b c 있음</div>
+    <div class="a b c">a b c 있음</div>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+        }
+        table{
+            border-collapse: collapse;
+        }
+        td{
+            display:inline-block;
+            box-sizing:border-box;
+            width:30px;
+            height:30px;
+            vertical-align: middle;
+            transition: all 0.5s;
+        }
+        .black{
+            background-color:black;
+        }
+        .red{
+            background-color: red;
+        }
+        .gray{
+            background-color: gray;
+        }
+    </style>
+</head>
+<body>
+    <!--<div>위, 아래 방향키를 누를 때마다 애니메이션이 생기는 위치가 바뀐다.</div>
+    <div>테이블 크기보다 더 아래 또는 더 위로 갈 경우 반대편 끝으로 정해진다.</div>
+    <div>애니메이션은 순서대로 색이 생겼다가 사라지도록 한다.</div>
+    <div>검은 색인 부분은 빨간색을, 하얀색 부분은 회색으로 된다.</div>!-->
+    <table>
+        <tbody></tbody>
+    </table>
+    <script>
+        const tbody = document.querySelector('tbody');
+        const size = 20;
+        let index = 0;
+        let where = 0;
+        for(let i = 0; i < size; i++){
+            const tr = document.createElement('tr');
+            const td = document.createElement('td');
+            td.innerHTML = '▶️';
+            tr.appendChild(td);
+            for(let j = 0; j < size; j++){
+                const td = document.createElement('td');
+                if(j < size - i){
+                    td.classList.add('black');
+                }
+                tr.appendChild(td);
+            }
+            tbody.appendChild(tr);
+        }
+
+        window.onkeydown = e => {
+            if(e.key === 'ArrowDown'){
+                index = (index + 1) % size;
+            } else if(e.key === 'ArrowUp'){
+                index = (index - 1 + size) % size;
+            }
+        };
+
+        // 힌트 children을 사용
+        setInterval(() => {
+            const tar = tbody.children[index];
+            let w = (where % size) + 1;
+            if(w <= size - index){
+                tar.children[w].classList.add('red');
+            } else {
+                tar.children[w].classList.add('gray');
+            }
+            setTimeout(() => {
+                tar.classList[w].classList.remove('red');
+                tar.classList[w].classList.remove('gray');
+            }, 500);
+            where ++;
+        }, 40);
+    </script>
+</body>
+</html>

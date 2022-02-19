@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        table{
+            border-collapse: collapse;
+        }
+        th{
+            background-color: lightblue;
+            padding: 5px 30px
+        }
+        td, th{
+            text-align: center;
+            border: 1px solid black;
+        }
+        .day{
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .red{
+            color: red;
+        }
+        .blue{
+            font-size: 20px;
+            font-weight: bold;
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <h2>주간식단표</h2>
+    <table>
+        <tr>
+            <th>월/일</th>
+            <th>오전간식</th>
+            <th>점심</th>
+            <th>오후간식</th>
+            <th>저녁</th>
+        </tr>
+        <tr>
+            <td class="day">4/16<br>월요일</td>
+            <td rowspan="6">제철과일<br>토스트<br>빵류<br>과일쥬스<br>등</td>
+            <td>조기구이</td>
+            <td rowspan="6">한과<br>과자 등<br>다과류<br>초코파이<br>떡라면</td>
+            <td>쭈구미야채볶음</td>
+        </tr>
+        <tr>
+            <td class="day">4/17<br>화요일</td>
+            <td>알곤이탕</td>
+            <td>돈육버섯볶음</td>
+        </tr>
+        <tr>
+            <td class="day">4/18<br>수요일</td>
+            <td>갈치조림</td>
+            <td>닭갈비</td>
+        </tr>
+        <tr>
+            <td class="day">4/19<br>목요일</td>
+            <td>해물고추전</td>
+            <td>꽁치무조림</td>
+        </tr>
+        <tr>
+            <td class="day">4/20<br>금요일</td>
+            <td>우엉땅콩조림</td>
+            <td>두부구이</td>
+        </tr>
+        <tr>
+            <td class="blue">4/21<br>토요일</td>
+            <td>미트볼피망볶음</td>
+            <td>돈육볶음</td>
+        </tr>
+        <tr>
+            <td class="red">4/22<br>일요일</td>
+            <td colspan="4" class="red">휴 일</td>
+        </tr>
+    </table>
+</body>
+</html>
