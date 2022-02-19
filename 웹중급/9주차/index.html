@@ -111,7 +111,7 @@
                 let N = Math.floor(Math.random() * 256)
                 let B = Math.floor(Math.random() * 256)
                 div.style.backgroundColor = `rgb(${M}, ${N}, ${B})`;
-                div.style.height = '50px'
+                //div.style.height = '50px'
                 let num = i
                 graph.bars.key = i;
                 graph.bars.value = {div, num}
@@ -169,6 +169,7 @@
                     total += i.num;
 
                 }
+                
                 // dices를 순회하며 dice에 랜덤한 수를 입력하고, 그것에 따라서 div의 backgroundImagePosition을 바꾼다.  
                 
                 // dice를 나온 숫자에따라 정렬한다.
